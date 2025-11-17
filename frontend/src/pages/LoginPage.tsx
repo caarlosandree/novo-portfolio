@@ -9,6 +9,7 @@ import {
   Box,
   Alert,
 } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material'
 
 export function LoginPage() {
   const [username, setUsername] = useState('')
@@ -43,6 +44,15 @@ export function LoginPage() {
         }}
       >
         <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
+          <Button
+            startIcon={<ArrowBack />}
+            onClick={() => {
+              window.location.hash = '#/'
+            }}
+            sx={{ mb: 2 }}
+          >
+            Voltar para página principal
+          </Button>
           <Typography variant="h4" component="h1" gutterBottom align="center">
             Administração do Portfólio
           </Typography>

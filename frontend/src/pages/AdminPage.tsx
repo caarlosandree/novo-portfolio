@@ -11,10 +11,13 @@ import {
   Alert,
   CircularProgress,
   IconButton,
+  Card,
+  CardContent,
 } from '@mui/material'
-import { Person, Edit, Add } from '@mui/icons-material'
+import { Person, Edit, Add, Delete } from '@mui/icons-material'
 import { portfolioApi } from '@/services/api'
-import { EditTranslationModal, AddTranslationModal } from '@/components/modals/admin'
+import { EditTranslationModal, AddTranslationModal, ExperienceModal } from '@/components/modals/admin'
+import type { ExperienciaProfissional, CreateExperienciaRequest, UpdateExperienciaRequest } from '@/types'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -48,6 +51,12 @@ export function AdminPage() {
   const [openEditModal, setOpenEditModal] = useState(false)
   const [openAddModal, setOpenAddModal] = useState(false)
   const [editingItem, setEditingItem] = useState<{ key: string; value: string } | null>(null)
+  
+  // Estados para experiências
+  const [experiences, setExperiences] = useState<ExperienciaProfissional[]>([])
+  const [loadingExperiences, setLoadingExperiences] = useState(false)
+  const [openExperienceModal, setOpenExperienceModal] = useState(false)
+  const [editingExperience, setEditingExperience] = useState<ExperienciaProfissional | null>(null)
 
   const loadTranslations = useCallback(async () => {
     setLoading(true)
@@ -65,6 +74,24 @@ export function AdminPage() {
     loadTranslations()
   }, [loadTranslations])
 
+  const loadExperiences = useCallback(async () => {
+    setLoadingExperiences(true)
+    try {
+      const data = await portfolioApi.getAllExperiences()
+      setExperiences(data)
+    } catch {
+      setMessage({ type: 'error', text: 'Erro ao carregar experiências' })
+    } finally {
+      setLoadingExperiences(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (tabValue === 1) {
+      loadExperiences()
+    }
+  }, [tabValue, loadExperiences])
+
   const handleOpenEditModal = (item: { key: string; value: unknown }) => {
     setEditingItem({ key: item.key, value: String(item.value) })
     setOpenEditModal(true)
@@ -81,6 +108,58 @@ export function AdminPage() {
 
   const handleCloseAddModal = () => {
     setOpenAddModal(false)
+  }
+
+  const handleOpenExperienceModal = (exp?: ExperienciaProfissional) => {
+    setEditingExperience(exp || null)
+    setOpenExperienceModal(true)
+  }
+
+  const handleCloseExperienceModal = () => {
+    setOpenExperienceModal(false)
+    setEditingExperience(null)
+  }
+
+  const handleSaveExperience = async (exp: CreateExperienciaRequest | UpdateExperienciaRequest, translations?: Record<string, UpdateExperienciaRequest>) => {
+    setMessage(null)
+    try {
+      if (editingExperience?.id) {
+        // Atualiza a experiência
+        await portfolioApi.updateExperience(editingExperience.id, exp as UpdateExperienciaRequest)
+        // Salva as traduções se fornecidas
+        if (translations && Object.keys(translations).length > 0) {
+          await portfolioApi.saveExperienceTranslations(editingExperience.id, translations)
+        }
+        setMessage({ type: 'success', text: 'Experiência atualizada com sucesso!' })
+      } else {
+        // Cria a experiência
+        const result = await portfolioApi.createExperience(exp as CreateExperienciaRequest)
+        // Salva as traduções se fornecidas
+        if (translations && Object.keys(translations).length > 0) {
+          await portfolioApi.saveExperienceTranslations(result.id, translations)
+        }
+        setMessage({ type: 'success', text: 'Experiência criada com sucesso!' })
+      }
+      await loadExperiences()
+    } catch (err) {
+      setMessage({ type: 'error', text: err instanceof Error ? err.message : 'Erro ao salvar experiência' })
+      throw err
+    }
+  }
+
+  const handleDeleteExperience = async (id: number) => {
+    if (!confirm('Tem certeza que deseja deletar esta experiência?')) {
+      return
+    }
+
+    setMessage(null)
+    try {
+      await portfolioApi.deleteExperience(id)
+      setMessage({ type: 'success', text: 'Experiência deletada com sucesso!' })
+      await loadExperiences()
+    } catch (err) {
+      setMessage({ type: 'error', text: err instanceof Error ? err.message : 'Erro ao deletar experiência' })
+    }
   }
 
   const handleSaveTranslation = async (key: string, value: string) => {
@@ -148,7 +227,10 @@ export function AdminPage() {
           >
             Perfil
           </Button>
-          <Button variant="outlined" onClick={logout}>
+          <Button variant="outlined" onClick={() => {
+            logout()
+            window.location.hash = '#/'
+          }}>
             Sair
           </Button>
         </Box>
@@ -188,20 +270,38 @@ export function AdminPage() {
               <Button
                 variant={selectedLanguage === 'pt-BR' ? 'contained' : 'outlined'}
                 onClick={() => setSelectedLanguage('pt-BR')}
+                sx={{
+                  fontSize: '1.5rem',
+                  minWidth: '60px',
+                  height: '48px',
+                }}
+                title="Português"
               >
-                Português
+                🇧🇷
               </Button>
               <Button
                 variant={selectedLanguage === 'en' ? 'contained' : 'outlined'}
                 onClick={() => setSelectedLanguage('en')}
+                sx={{
+                  fontSize: '1.5rem',
+                  minWidth: '60px',
+                  height: '48px',
+                }}
+                title="English"
               >
-                English
+                🇺🇸
               </Button>
               <Button
                 variant={selectedLanguage === 'es' ? 'contained' : 'outlined'}
                 onClick={() => setSelectedLanguage('es')}
+                sx={{
+                  fontSize: '1.5rem',
+                  minWidth: '60px',
+                  height: '48px',
+                }}
+                title="Español"
               >
-                Español
+                🇪🇸
               </Button>
             </Box>
 
@@ -244,12 +344,88 @@ export function AdminPage() {
         </TabPanel>
 
         <TabPanel value={tabValue} index={1}>
-          <Typography variant="h6" gutterBottom>
-            Gerenciar Experiências
-          </Typography>
-          <Alert severity="info">
-            Funcionalidade em desenvolvimento. Em breve você poderá editar experiências profissionais aqui.
-          </Alert>
+          <Box sx={{ mb: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+              <Typography variant="h6">
+                Gerenciar Experiências
+              </Typography>
+              <Button
+                variant="contained"
+                startIcon={<Add />}
+                onClick={() => handleOpenExperienceModal()}
+                color="primary"
+              >
+                Adicionar Experiência
+              </Button>
+            </Box>
+
+            {loadingExperiences ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+                <CircularProgress />
+              </Box>
+            ) : experiences.length === 0 ? (
+              <Alert severity="info">
+                Nenhuma experiência cadastrada. Clique em "Adicionar Experiência" para começar.
+              </Alert>
+            ) : (
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {experiences.map((exp) => (
+                  <Card key={exp.id} variant="outlined">
+                    <CardContent>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <Box sx={{ flex: 1 }}>
+                          <Typography variant="h6" gutterBottom>
+                            {exp.cargo}
+                          </Typography>
+                          <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+                            {exp.empresa}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary" gutterBottom>
+                            {exp.localizacao} • {exp.periodo}
+                          </Typography>
+                          {exp.atividades && exp.atividades.length > 0 && (
+                            <Box sx={{ mt: 2 }}>
+                              <Typography variant="body2" fontWeight="bold" gutterBottom>
+                                Atividades:
+                              </Typography>
+                              <Box component="ul" sx={{ m: 0, pl: 2 }}>
+                                {exp.atividades.slice(0, 3).map((atividade, idx) => (
+                                  <Typography key={idx} component="li" variant="body2" color="text.secondary">
+                                    {atividade}
+                                  </Typography>
+                                ))}
+                                {exp.atividades.length > 3 && (
+                                  <Typography component="li" variant="body2" color="text.secondary" fontStyle="italic">
+                                    ... e mais {exp.atividades.length - 3} atividade(s)
+                                  </Typography>
+                                )}
+                              </Box>
+                            </Box>
+                          )}
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: 1 }}>
+                          <IconButton
+                            color="primary"
+                            onClick={() => handleOpenExperienceModal(exp)}
+                            size="small"
+                          >
+                            <Edit />
+                          </IconButton>
+                          <IconButton
+                            color="error"
+                            onClick={() => exp.id && handleDeleteExperience(exp.id)}
+                            size="small"
+                          >
+                            <Delete />
+                          </IconButton>
+                        </Box>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Box>
+            )}
+          </Box>
         </TabPanel>
 
         <TabPanel value={tabValue} index={2}>
@@ -276,6 +452,13 @@ export function AdminPage() {
         open={openAddModal}
         onClose={handleCloseAddModal}
         onSave={handleSaveTranslation}
+      />
+
+      <ExperienceModal
+        open={openExperienceModal}
+        onClose={handleCloseExperienceModal}
+        onSave={handleSaveExperience}
+        experience={editingExperience}
       />
     </Container>
   )

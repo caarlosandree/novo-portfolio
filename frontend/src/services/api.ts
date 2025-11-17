@@ -1,6 +1,8 @@
 import type { 
   CategoriaHabilidade, 
-  ExperienciaProfissional, 
+  ExperienciaProfissional,
+  CreateExperienciaRequest,
+  UpdateExperienciaRequest,
   Projeto,
   About,
   Education,
@@ -156,6 +158,92 @@ export const portfolioApi = {
     } catch {
       return false
     }
+  },
+
+  /**
+   * Métodos de administração (requerem autenticação)
+   */
+  async fetchWithAuth<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+    const token = localStorage.getItem('portfolio_auth_token')
+    if (!token) {
+      throw new ApiError('Token de autenticação não encontrado')
+    }
+
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        ...options.headers,
+      },
+    })
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: response.statusText }))
+      throw new ApiError(error.error || 'Erro na requisição', response.status, response)
+    }
+
+    return await response.json()
+  },
+
+  /**
+   * Busca todas as experiências (admin)
+   */
+  async getAllExperiences(): Promise<ExperienciaProfissional[]> {
+    return this.fetchWithAuth<ExperienciaProfissional[]>('/api/admin/experiences')
+  },
+
+  /**
+   * Busca uma experiência por ID (admin)
+   */
+  async getExperience(id: number): Promise<ExperienciaProfissional> {
+    return this.fetchWithAuth<ExperienciaProfissional>(`/api/admin/experiences/${id}`)
+  },
+
+  /**
+   * Cria uma nova experiência (admin)
+   */
+  async createExperience(exp: CreateExperienciaRequest): Promise<{ id: number; message: string }> {
+    return this.fetchWithAuth<{ id: number; message: string }>('/api/admin/experiences', {
+      method: 'POST',
+      body: JSON.stringify(exp),
+    })
+  },
+
+  /**
+   * Atualiza uma experiência (admin)
+   */
+  async updateExperience(id: number, exp: UpdateExperienciaRequest): Promise<{ message: string }> {
+    return this.fetchWithAuth<{ message: string }>(`/api/admin/experiences/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(exp),
+    })
+  },
+
+  /**
+   * Deleta uma experiência (admin)
+   */
+  async deleteExperience(id: number): Promise<{ message: string }> {
+    return this.fetchWithAuth<{ message: string }>(`/api/admin/experiences/${id}`, {
+      method: 'DELETE',
+    })
+  },
+
+  /**
+   * Busca traduções de uma experiência (admin)
+   */
+  async getExperienceTranslations(id: number): Promise<Record<string, UpdateExperienciaRequest>> {
+    return this.fetchWithAuth<Record<string, UpdateExperienciaRequest>>(`/api/admin/experiences/${id}/translations`)
+  },
+
+  /**
+   * Salva traduções de uma experiência (admin)
+   */
+  async saveExperienceTranslations(id: number, translations: Record<string, UpdateExperienciaRequest>): Promise<{ message: string }> {
+    return this.fetchWithAuth<{ message: string }>(`/api/admin/experiences/${id}/translations`, {
+      method: 'POST',
+      body: JSON.stringify(translations),
+    })
   },
 }
 

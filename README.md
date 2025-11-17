@@ -6,6 +6,9 @@ Portfólio pessoal moderno e responsivo desenvolvido com tecnologias de ponta, a
 
 - [Sobre o Projeto](#sobre-o-projeto)
 - [Funcionalidades](#funcionalidades)
+  - [Seções do Portfólio](#seções-do-portfólio)
+  - [Recursos Técnicos](#recursos-técnicos)
+  - [Painel de Administração](#painel-de-administração)
 - [Stack Tecnológica](#stack-tecnológica)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Pré-requisitos](#pré-requisitos)
@@ -54,6 +57,35 @@ Este é um portfólio pessoal completo desenvolvido com arquitetura moderna, sep
 - Skeletons de loading para melhor UX
 - Responsividade completa (mobile-first)
 - Acessibilidade (a11y) com skip to content
+
+### Painel de Administração
+
+O sistema inclui um painel administrativo completo com autenticação JWT para gerenciar o conteúdo do portfólio:
+
+#### 🔐 Autenticação
+- Sistema de login seguro com JWT tokens
+- Middleware de autenticação para rotas protegidas
+- Gerenciamento de sessão com armazenamento local
+
+#### 📝 Gerenciamento de Traduções
+- Visualização de todas as traduções organizadas por idioma (pt-BR, en, es)
+- Edição de traduções existentes através de interface intuitiva
+- Adição de novas chaves de tradução
+- Busca e filtragem de traduções
+- Suporte completo para estrutura hierárquica de chaves (ex: `section.subsection.key`)
+
+#### 💼 Gerenciamento de Experiências Profissionais
+- **CRUD Completo**: Criar, visualizar, editar e deletar experiências
+- **Traduções Multi-idioma**: Gerenciar traduções de experiências para os 3 idiomas suportados
+- **Interface com Abas**: Edição separada por idioma (pt-BR, en, es) em um único modal
+- **Atividades Dinâmicas**: Adicionar/remover atividades de forma dinâmica
+- **Ordem de Exibição**: Definir a ordem de exibição das experiências no portfólio
+- **Validação**: Validação obrigatória dos campos principais em português
+- **Fallback Inteligente**: Traduções opcionais com fallback para pt-BR quando não preenchidas
+
+#### 🚧 Gerenciamento de Projetos (Em Desenvolvimento)
+- Interface preparada para gerenciamento de projetos
+- Funcionalidade será implementada em breve
 
 ## 🛠️ Stack Tecnológica
 
@@ -206,6 +238,13 @@ O frontend estará disponível em `http://localhost:5173`
 
 > **Nota**: Certifique-se de que o backend está rodando antes de iniciar o frontend para evitar erros de conexão.
 
+### Acessando o Painel de Administração
+
+1. Acesse a página de login em `http://localhost:5173/#/login`
+2. Faça login com suas credenciais de administrador
+3. Após o login bem-sucedido, você será redirecionado para o painel admin em `http://localhost:5173/#/admin`
+4. O painel permite gerenciar traduções, experiências profissionais e projetos (em desenvolvimento)
+
 ## 🔌 API Endpoints
 
 ### Health Check
@@ -224,6 +263,38 @@ O frontend estará disponível em `http://localhost:5173`
 - `GET /api/portfolio/certification-tracks?language={lang}` - Trilhas de certificações
 - `GET /api/portfolio/contact` - Informações de contato
 - `GET /api/portfolio/translations/{language}` - Traduções para um idioma específico
+
+### Autenticação
+
+- `POST /api/auth/login` - Realiza login e retorna token JWT
+- `POST /api/auth/logout` - Realiza logout (requer autenticação)
+
+### Administração (Requer Autenticação)
+
+Todas as rotas abaixo requerem o header `Authorization: Bearer <token>`.
+
+#### Traduções
+
+- `PUT /api/admin/translations/{language}` - Atualiza uma tradução específica
+  - Body: `{ "key": "string", "value": "string" }`
+  - Parâmetros: `language` (pt-BR, en, es)
+
+#### Experiências Profissionais
+
+- `GET /api/admin/experiences` - Lista todas as experiências
+- `GET /api/admin/experiences/{id}` - Obtém uma experiência por ID
+- `POST /api/admin/experiences` - Cria uma nova experiência
+  - Body: `CreateExperienciaRequest`
+- `PUT /api/admin/experiences/{id}` - Atualiza uma experiência existente
+  - Body: `UpdateExperienciaRequest`
+- `DELETE /api/admin/experiences/{id}` - Deleta uma experiência
+- `GET /api/admin/experiences/{id}/translations` - Obtém traduções de uma experiência
+- `POST /api/admin/experiences/{id}/translations` - Salva traduções de uma experiência
+  - Body: `{ "en": UpdateExperienciaRequest, "es": UpdateExperienciaRequest }`
+
+#### Projetos
+
+- `PUT /api/admin/projects/{id}` - Atualiza um projeto (em desenvolvimento)
 
 ### Parâmetros de Idioma
 
@@ -397,34 +468,41 @@ As cores das seções podem ser personalizadas em:
 
 ### Conteúdo
 
-O conteúdo é gerenciado através do banco de dados. Para atualizar:
-1. Modifique diretamente no banco de dados, ou
-2. Crie novas migrations SQL
+O conteúdo pode ser gerenciado de duas formas:
+
+1. **Painel de Administração** (Recomendado): Acesse `/admin` após fazer login para gerenciar traduções, experiências e projetos através de uma interface visual intuitiva.
+
+2. **Banco de Dados Direto**: Modifique diretamente no banco de dados ou crie novas migrations SQL.
 
 ### Traduções
 
 As traduções são gerenciadas em:
-- Frontend: `frontend/src/i18n/locales/`
-- Backend: Tabela `translations` no banco de dados
+- **Frontend**: `frontend/src/i18n/locales/` - Traduções estáticas do frontend
+- **Backend**: Tabela `translations` no banco de dados - Traduções dinâmicas gerenciáveis via painel admin
+- **Painel Admin**: Interface visual para editar traduções sem necessidade de acessar o banco de dados
 
 ## 🔒 Segurança
 
-- CORS configurado (ajuste `AllowOrigins` em produção)
-- Middleware de segurança (helmet-like)
-- Tratamento de erros centralizado
-- Validação de dados (preparado para implementação)
-- Logging estruturado para auditoria
+- **Autenticação JWT**: Sistema de autenticação baseado em tokens JWT
+- **Middleware de Autenticação**: Proteção de rotas administrativas com validação de token
+- **CORS configurado**: Ajuste `AllowOrigins` em produção
+- **Middleware de segurança**: Headers de segurança (helmet-like)
+- **Tratamento de erros centralizado**: Respostas de erro padronizadas
+- **Validação de dados**: Validação de campos obrigatórios
+- **Logging estruturado**: Sistema de logs completo para auditoria e debugging
+- **Armazenamento seguro**: Tokens JWT armazenados no localStorage do cliente
 
 ## 📝 Próximos Passos
 
 - [ ] Implementar testes unitários e de integração
 - [ ] Adicionar documentação Swagger/OpenAPI
 - [ ] Implementar cache (Redis ou in-memory)
-- [ ] Adicionar validação de dados com `validator`
 - [ ] Configurar CI/CD
 - [ ] Implementar tema claro/escuro completo
 - [ ] Adicionar analytics
 - [ ] Otimizar SEO
+- [ ] Completar gerenciamento de projetos no painel admin
+- [ ] Adicionar gerenciamento de educação e certificações no painel admin
 
 ## 🤝 Contribuindo
 

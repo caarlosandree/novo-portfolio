@@ -104,10 +104,12 @@ func (r *portfolioRepository) GetInterpersonalSkills(ctx context.Context) ([]mod
 func (r *portfolioRepository) GetExperiences(ctx context.Context) ([]models.ExperienciaProfissional, error) {
 	query := `
 		SELECT 
+			e.id,
 			e.cargo,
 			e.empresa,
 			e.localizacao,
 			e.periodo,
+			e.ordem,
 			COALESCE(
 				(SELECT array_agg(descricao ORDER BY min_ordem)
 				 FROM (SELECT descricao, MIN(ordem) as min_ordem
@@ -129,7 +131,7 @@ func (r *portfolioRepository) GetExperiences(ctx context.Context) ([]models.Expe
 	var experiences []models.ExperienciaProfissional
 	for rows.Next() {
 		var exp models.ExperienciaProfissional
-		if err := rows.Scan(&exp.Cargo, &exp.Empresa, &exp.Localizacao, &exp.Periodo, &exp.Atividades); err != nil {
+		if err := rows.Scan(&exp.ID, &exp.Cargo, &exp.Empresa, &exp.Localizacao, &exp.Periodo, &exp.Ordem, &exp.Atividades); err != nil {
 			return nil, fmt.Errorf("erro ao escanear experiência: %w", err)
 		}
 		experiences = append(experiences, exp)

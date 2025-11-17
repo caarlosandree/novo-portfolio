@@ -142,8 +142,16 @@ func setupRoutes(e *echo.Echo, portfolioHandler *handlers.PortfolioHandler, heal
 	// Rotas de administração de traduções
 	admin.PUT("/translations/:language", adminHandler.UpdateTranslation)
 	
-	// Rotas de administração de outras entidades
+	// Rotas de administração de experiências
+	admin.GET("/experiences", adminHandler.GetAllExperiences)
+	admin.GET("/experiences/:id", adminHandler.GetExperience)
+	admin.POST("/experiences", adminHandler.CreateExperience)
 	admin.PUT("/experiences/:id", adminHandler.UpdateExperience)
+	admin.DELETE("/experiences/:id", adminHandler.DeleteExperience)
+	admin.GET("/experiences/:id/translations", adminHandler.GetExperienceTranslations)
+	admin.POST("/experiences/:id/translations", adminHandler.SaveExperienceTranslations)
+	
+	// Rotas de administração de outras entidades
 	admin.PUT("/projects/:id", adminHandler.UpdateProject)
 }
 

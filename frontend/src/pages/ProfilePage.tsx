@@ -9,7 +9,6 @@ import {
   Button,
   Alert,
   LinearProgress,
-  Grid,
 } from '@mui/material'
 import { Lock, CheckCircle, Cancel } from '@mui/icons-material'
 
@@ -185,98 +184,88 @@ export function ProfilePage() {
           )}
 
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Senha Atual"
-                  type="password"
-                  variant="outlined"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  required
-                  disabled={loading}
-                />
-              </Grid>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <TextField
+                fullWidth
+                label="Senha Atual"
+                type="password"
+                variant="outlined"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                required
+                disabled={loading}
+              />
 
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Nova Senha"
-                  type="password"
-                  variant="outlined"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                  disabled={loading}
-                  helperText={
-                    newPassword && (
-                      <Box sx={{ mt: 1 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                          <Lock sx={{ fontSize: 16 }} />
-                          <Typography variant="caption" color={passwordStrength.color}>
-                            Força: {passwordStrength.label}
-                          </Typography>
-                        </Box>
-                        <LinearProgress
-                          variant="determinate"
-                          value={(passwordStrength.score / 6) * 100}
-                          color={passwordStrength.color}
-                          sx={{ height: 6, borderRadius: 3, mb: 1 }}
-                        />
+              <TextField
+                fullWidth
+                label="Nova Senha"
+                type="password"
+                variant="outlined"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                disabled={loading}
+                helperText={
+                  newPassword && (
+                    <Box sx={{ mt: 1 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                        <Lock sx={{ fontSize: 16 }} />
+                        <Typography variant="caption" color={passwordStrength.color}>
+                          Força: {passwordStrength.label}
+                        </Typography>
                       </Box>
-                    )
-                  }
-                />
-              </Grid>
+                      <LinearProgress
+                        variant="determinate"
+                        value={(passwordStrength.score / 6) * 100}
+                        color={passwordStrength.color}
+                        sx={{ height: 6, borderRadius: 3, mb: 1 }}
+                      />
+                    </Box>
+                  )
+                }
+              />
 
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Confirmar Nova Senha"
-                  type="password"
-                  variant="outlined"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  disabled={loading}
-                  error={confirmPassword !== '' && newPassword !== confirmPassword}
-                  helperText={
-                    confirmPassword !== '' && newPassword !== confirmPassword
-                      ? 'As senhas não coincidem'
-                      : ''
-                  }
-                />
-              </Grid>
+              <TextField
+                fullWidth
+                label="Confirmar Nova Senha"
+                type="password"
+                variant="outlined"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                disabled={loading}
+                error={confirmPassword !== '' && newPassword !== confirmPassword}
+                helperText={
+                  confirmPassword !== '' && newPassword !== confirmPassword
+                    ? 'As senhas não coincidem'
+                    : ''
+                }
+              />
 
               {newPassword && (
-                <Grid item xs={12}>
-                  <Paper variant="outlined" sx={{ p: 2, bgcolor: 'background.default' }}>
-                    <Typography variant="subtitle2" gutterBottom>
-                      Requisitos da senha:
-                    </Typography>
-                    <RequirementItem met={requirements.length} label="Mínimo de 8 caracteres" />
-                    <RequirementItem met={requirements.hasUpper} label="Pelo menos uma letra maiúscula" />
-                    <RequirementItem met={requirements.hasLower} label="Pelo menos uma letra minúscula" />
-                    <RequirementItem met={requirements.hasNumber} label="Pelo menos um número" />
-                    <RequirementItem met={requirements.hasSpecial} label="Pelo menos um caractere especial" />
-                  </Paper>
-                </Grid>
+                <Paper variant="outlined" sx={{ p: 2, bgcolor: 'background.default' }}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    Requisitos da senha:
+                  </Typography>
+                  <RequirementItem met={requirements.length} label="Mínimo de 8 caracteres" />
+                  <RequirementItem met={requirements.hasUpper} label="Pelo menos uma letra maiúscula" />
+                  <RequirementItem met={requirements.hasLower} label="Pelo menos uma letra minúscula" />
+                  <RequirementItem met={requirements.hasNumber} label="Pelo menos um número" />
+                  <RequirementItem met={requirements.hasSpecial} label="Pelo menos um caractere especial" />
+                </Paper>
               )}
 
-              <Grid item xs={12}>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  size="large"
-                  disabled={loading || passwordStrength.score < 3}
-                  sx={{ mt: 2 }}
-                >
-                  {loading ? 'Alterando...' : 'Alterar Senha'}
-                </Button>
-              </Grid>
-            </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                size="large"
+                disabled={loading || passwordStrength.score < 3}
+                sx={{ mt: 2 }}
+              >
+                {loading ? 'Alterando...' : 'Alterar Senha'}
+              </Button>
+            </Box>
           </form>
         </Box>
       </Paper>
