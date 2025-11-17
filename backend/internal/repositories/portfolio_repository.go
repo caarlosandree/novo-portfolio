@@ -149,11 +149,12 @@ func (r *portfolioRepository) GetProjects(ctx context.Context) ([]models.Projeto
 		SELECT 
 			p.titulo,
 			p.descricao,
-			COALESCE(array_agg(t.nome ORDER BY t.nome) FILTER (WHERE t.nome IS NOT NULL), '{}') as tecnologias
+			COALESCE(array_agg(t.nome ORDER BY t.nome) FILTER (WHERE t.nome IS NOT NULL), '{}') as tecnologias,
+			p.github_url
 		FROM projetos p
 		LEFT JOIN projeto_tecnologias pt ON pt.projeto_id = p.id
 		LEFT JOIN tecnologias t ON t.id = pt.tecnologia_id
-		GROUP BY p.id, p.titulo, p.descricao
+		GROUP BY p.id, p.titulo, p.descricao, p.github_url
 		ORDER BY p.ordem, p.id
 	`
 
@@ -166,7 +167,7 @@ func (r *portfolioRepository) GetProjects(ctx context.Context) ([]models.Projeto
 	var projects []models.Projeto
 	for rows.Next() {
 		var project models.Projeto
-		if err := rows.Scan(&project.Titulo, &project.Descricao, &project.Tecnologias); err != nil {
+		if err := rows.Scan(&project.Titulo, &project.Descricao, &project.Tecnologias, &project.GithubUrl); err != nil {
 			return nil, fmt.Errorf("erro ao escanear projeto: %w", err)
 		}
 		projects = append(projects, project)

@@ -1,10 +1,9 @@
-import { Box, Toolbar, Button } from '@mui/material'
+import { Box, Toolbar } from '@mui/material'
 import { lazy, Suspense, useCallback, useMemo } from 'react'
 import { NavigationBar } from '@/components/NavigationBar'
 import { HeroSection } from '@/components/HeroSection'
 import { useScrollToSection } from '@/hooks/useScrollToSection'
 import { usePortfolioData } from '@/hooks/usePortfolioData'
-import { useLanguage } from '@/contexts/LanguageContext'
 import {
   AboutSectionSkeleton,
   SkillsSectionSkeleton,
@@ -28,7 +27,6 @@ const ScrollToTop = lazy(() => import('@/components/ScrollToTop').then(module =>
 
 export const HomePage = () => {
   const scrollToSection = useScrollToSection()
-  const { t } = useLanguage()
   const { data } = usePortfolioData()
 
   const handleNavigate = useCallback((sectionId: string) => {
@@ -37,14 +35,6 @@ export const HomePage = () => {
 
   const handleMenuClick = useCallback(() => {
     // Menu click handler se necessário
-  }, [])
-
-  const handleSkipToContent = useCallback(() => {
-    const mainContent = document.getElementById('inicio')
-    if (mainContent) {
-      mainContent.focus()
-      mainContent.scrollIntoView({ behavior: 'smooth' })
-    }
   }, [])
 
   // Memoizar dados para evitar recriação desnecessária
@@ -64,22 +54,6 @@ export const HomePage = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Button
-        onClick={handleSkipToContent}
-        sx={{
-          position: 'absolute',
-          top: '-40px',
-          left: 0,
-          zIndex: 10000,
-          backgroundColor: 'primary.main',
-          color: 'primary.contrastText',
-          '&:focus': {
-            top: 0,
-          },
-        }}
-      >
-        {t('a11y.skipToContent')}
-      </Button>
       <NavigationBar onMenuClick={handleMenuClick} onNavigate={handleNavigate} />
       <Toolbar />
       <HeroSection onNavigate={handleNavigate} />

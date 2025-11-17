@@ -409,6 +409,9 @@
     "currentPage": "Página actual",
     "skipToContent": "Saltar al contenido principal",
     "viewProject": "Ver proyecto",
+    "viewProjectOnGitHub": "Ver proyecto en GitHub",
+    "scrollLeft": "Desplazar a la izquierda",
+    "scrollRight": "Desplazar a la derecha",
     "contactVia": "Contactar por {{method}}",
     "menuExpanded": "Menú de idiomas expandido",
     "menuCollapsed": "Menú de idiomas contraído"

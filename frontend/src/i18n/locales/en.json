@@ -409,6 +409,9 @@
     "currentPage": "Current page",
     "skipToContent": "Skip to main content",
     "viewProject": "View project",
+    "viewProjectOnGitHub": "View project on GitHub",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right",
     "contactVia": "Contact via {{method}}",
     "menuExpanded": "Language menu expanded",
     "menuCollapsed": "Language menu collapsed"
