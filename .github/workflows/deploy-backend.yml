@@ -41,12 +41,6 @@ jobs:
         run: |
           gcloud auth configure-docker gcr.io --quiet
 
-      - name: Habilitar APIs necessárias
-        run: |
-          gcloud services enable cloudbuild.googleapis.com --project=$PROJECT_ID
-          gcloud services enable run.googleapis.com --project=$PROJECT_ID
-          gcloud services enable containerregistry.googleapis.com --project=$PROJECT_ID
-
       - name: Verificar arquivos necessários
         run: |
           echo "Verificando estrutura do diretório..."

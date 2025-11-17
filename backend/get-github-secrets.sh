@@ -70,7 +70,19 @@ fi
 
 echo ""
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${BLUE}3. Configurando Permissões${NC}"
+echo -e "${BLUE}3. Habilitando APIs necessárias${NC}"
+echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+
+# Habilitar APIs necessárias (precisa ser feito pelo dono do projeto)
+echo "Habilitando APIs necessárias..."
+gcloud services enable cloudbuild.googleapis.com --project="$PROJECT_ID" || echo -e "${YELLOW}⚠️  API já habilitada ou erro ao habilitar${NC}"
+gcloud services enable run.googleapis.com --project="$PROJECT_ID" || echo -e "${YELLOW}⚠️  API já habilitada ou erro ao habilitar${NC}"
+gcloud services enable containerregistry.googleapis.com --project="$PROJECT_ID" || echo -e "${YELLOW}⚠️  API já habilitada ou erro ao habilitar${NC}"
+gcloud services enable artifactregistry.googleapis.com --project="$PROJECT_ID" || echo -e "${YELLOW}⚠️  API já habilitada ou erro ao habilitar${NC}"
+
+echo ""
+echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${BLUE}4. Configurando Permissões${NC}"
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
 # Roles necessárias
@@ -96,7 +108,7 @@ done
 
 echo ""
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${BLUE}4. Criando Chave JSON${NC}"
+echo -e "${BLUE}5. Criando Chave JSON${NC}"
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
 # Criar nova chave
@@ -119,7 +131,7 @@ echo -e "${GREEN}✅ Chave criada: ${KEY_FILE}${NC}"
 echo ""
 
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${BLUE}5. Informações para GitHub Secrets${NC}"
+echo -e "${BLUE}6. Informações para GitHub Secrets${NC}"
 echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
