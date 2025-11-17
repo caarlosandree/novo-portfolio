@@ -1,0 +1,417 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "education": "Education",
+    "experience": "Experience",
+    "certifications": "Courses & Certifications",
+    "projects": "Projects",
+    "contact": "Contact",
+    "fullName": "Carlos André - Full Stack Developer",
+    "shortName": "Carlos André"
+  },
+  "hero": {
+    "title": "Full Stack Developer",
+    "subtitle": "Transforming ideas into innovative digital solutions",
+    "viewProjects": "View Projects",
+    "contactMe": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "heading": "Full Stack Developer passionate about technology",
+    "paragraph1": "I'm a full stack developer with experience in creating modern, scalable, and high-performance web applications. I'm passionate about writing clean, efficient code and transforming complex problems into simple, innovative, and robust solutions.",
+    "paragraph2": "My journey in programming started out of curiosity and evolved into a career focused on building digital solutions that truly make a difference. I work with cutting-edge technologies in front-end and back-end development, using relational and NoSQL databases, in addition to having experience in Data Science and Machine Learning.",
+    "paragraph3": "I work with agile methodologies (Scrum and Kanban) and use project management tools to ensure consistent, organized deliveries aligned with business needs. I'm always updating myself with new technologies and best practices to deliver high-impact, quality solutions.",
+    "paragraph4": "Additionally, I have 14 years of experience in support, maintenance, and systems analysis, which gives me a broad view of architecture, operations, and system behavior in production. I also have 1 year of experience as a React and Node.js developer, strengthening my full stack work.",
+    "paragraph5": "Currently, I work as a Systems Analyst at NINA Tecnologia and also act as a micro-entrepreneur, being a partner, full stack developer, and tech lead at the technology company DocSend.",
+    "features": {
+      "development": {
+        "title": "Development",
+        "description": "Creating responsive, performant, and scalable web applications using industry best practices"
+      },
+      "fullStack": {
+        "title": "Full Stack",
+        "description": "Experience in full stack development, from modern front-end to robust back-end, including databases, DevOps, and cloud computing"
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Always learning new technologies and best practices to deliver quality solutions that add value to businesses"
+      }
+    }
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "subtitle": "Mastery of various technologies and tools used in the information technology market",
+    "technologies": "technologies",
+    "technologiesCount": "{{count}} Technologies",
+    "categories": {
+      "frontend": "Front-end & Frameworks",
+      "backend": "Back-end",
+      "databases": "Databases",
+      "dataScience": "Data Science & ML",
+      "devops": "DevOps & Cloud",
+      "tools": "Tools & Platforms",
+      "methodologies": "Methodologies"
+    }
+  },
+  "interpersonalSkills": {
+    "title": "Interpersonal and Management Skills",
+    "subtitle": "Throughout my journey, I have developed interpersonal and managerial competencies essential for a collaborative, productive, and results-oriented environment",
+    "skills": "skills",
+    "skillsCount": "{{count}} Skills",
+    "categories": {
+      "communication": "Communication & Relationship",
+      "management": "Management & Leadership",
+      "criticalThinking": "Critical Thinking & Problem Solving",
+      "adaptability": "Adaptability & Personal Development"
+    },
+    "skillItems": {
+      "effectiveCommunication": "Effective communication and active listening",
+      "empathy": "Empathy and relationship skills",
+      "negotiation": "Negotiation and customer service",
+      "collaboration": "Collaboration and teamwork",
+      "leadership": "Leadership and strategic vision",
+      "timeManagement": "Time management and organization",
+      "strategicMeetings": "Conducting strategic meetings",
+      "actionPlans": "Developing customized action plans for clients",
+      "teamTraining": "Continuous team training",
+      "analyticalThinking": "Analytical and critical thinking",
+      "problemSolving": "Problem solving with focus on results",
+      "creativity": "Creativity and innovation",
+      "attentionToDetail": "Attention to detail",
+      "proactivity": "Proactivity and flexibility",
+      "continuousLearning": "Continuous learning ability",
+      "adaptabilityLearning": "Adaptability and agile learning"
+    }
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "My professional journey and main achievements",
+    "activities": "Main activities and responsibilities",
+    "location": "Location",
+    "period": "Period",
+    "current": "current",
+    "present": "present",
+    "experiences": {
+      "exp0": {
+        "cargo": "FullStack Developer | Tech Lead | Partner/Founder",
+        "empresa": "DocSend",
+        "localizacao": "Florianópolis",
+        "periodo": "2025 – present",
+        "atividades": [
+          "Acting as the company's sole developer, responsible end-to-end for the product lifecycle (concept, architecture, development, deployment, monitoring, and maintenance).",
+          "Technical leadership as Tech Lead, defining architecture, code standards, technology stack, and development best practices for the platform.",
+          "Development of a multitenant accounting management platform, serving multiple offices/companies within the same infrastructure, with logical data and configuration isolation.",
+          "Building modern and responsive interfaces using React + Vite and Material UI, focusing on usability for accounting routines (entries, documents, reports, integrations).",
+          "Implementation of APIs and backend services in Node.js and Java, following architecture best practices (REST, layers, authentication/authorization) and maintaining security of fiscal and accounting data.",
+          "Modeling and maintenance of PostgreSQL 18 database, including multitenant data structure, query optimization, and index creation to ensure performance with growing data volume.",
+          "Use of Google Cloud (Cloud Run, Firebase, Cloud SQL) for deployment, scalability, and system observability, configuring environments, environment variables, logs, and monitoring.",
+          "Definition and maintenance of CI/CD pipelines, automating build, testing, and application deployment, reducing manual errors and accelerating delivery of new features.",
+          "Implementation of authentication mechanisms, access control, and security of sensitive data, considering compliance requirements and confidentiality of accounting information.",
+          "Creation of integrations with external services (e.g., tax systems, document issuance, authentication providers), including API consumption and provision.",
+          "Definition and monitoring of platform usage metrics (engagement, response time, errors, infrastructure costs), supporting decision-making on roadmap and optimization.",
+          "Creation of technical documentation (architecture, endpoints, deployment and operation processes) and support materials for clients and business team.",
+          "Active participation in strategic company decisions as partner/founder, contributing to business model definition, feature prioritization, and product vision."
+        ]
+      },
+      "exp1": {
+        "cargo": "Senior Support Analyst",
+        "empresa": "Nina Tecnologia",
+        "localizacao": "Palhoça",
+        "periodo": "2025 – present",
+        "atividades": [
+          "Creation and maintenance of conversational flows and chatbots on the NINA platform, using React Flow, JavaScript scripts, and prompt development for chatbot integrations with AI (language models and cognitive services).",
+          "Data analysis and report creation using Metabase and SQL, generating insights for business areas, monitoring bot performance, and identifying improvement opportunities.",
+          "Analysis and resolution of bugs and critical incidents in production environment, ensuring platform stability, availability, and performance.",
+          "Proactive monitoring of environment health indicators (logs, alarms, performance metrics, and chatbot flow usage) to anticipate failures and minimize customer impact.",
+          "Conducting technical and strategic meetings with clients, gathering requirements, defining scope, and developing customized action plans for conversational journey evolution.",
+          "Creation and updating of technical documentation, internal manuals, knowledge base, and troubleshooting procedures, reducing average resolution time and facilitating knowledge transfer between teams.",
+          "Joint work with Customer Success, product, and development teams to support implementations, monitor satisfaction indicators, and prioritize improvements and new features of the NINA platform.",
+          "Management and maintenance of the NINA platform post-implementation, focusing on continuous improvement of end-user and corporate client experience.",
+          "Specialized technical support for client technical teams, supporting the construction of new projects, integrations, and implementation of new features and facilities.",
+          "Analysis of integrations with third-party services, including API study and testing, technical requirement validation, and support in development scope definition.",
+          "Participation in root cause analysis (RCA) of incidents, definition and monitoring of preventive and corrective actions, aiming to reduce recurrences.",
+          "Contribution to internal process improvement projects based on best practices (such as ITIL), focusing on service standardization, inter-team flow improvement, and operational efficiency gains.",
+          "Collaboration in the evolution of monitoring, observability, and logging standards for the platform to facilitate diagnosis and decision-making in production."
+        ]
+      },
+      "exp2": {
+        "cargo": "Senior Operations and Support Analyst",
+        "empresa": "Intelbras",
+        "localizacao": "São José",
+        "periodo": "2020 – 2025",
+        "atividades": [
+          "Analysis and resolution of bugs and critical incidents in production environment, ensuring product stability, availability, and performance.",
+          "Proactive monitoring of environment health indicators (logs, alarms, performance metrics) to anticipate failures and minimize customer impact.",
+          "Conducting strategic meetings with clients, understanding business needs, and developing customized action plans.",
+          "Creation and updating of technical documentation, internal manuals, knowledge base (KCS), and troubleshooting procedures to optimize service flow and reduce mean time to resolution (MTTR).",
+          "Joint work with Customer Success and other business areas to support implementations, monitor satisfaction indicators (NPS/CSAT), and contribute to prioritization of improvements and new features.",
+          "Management of WideVoice (Cloud PABX) product post-sale, focusing on continuous improvement of customer experience, churn reduction, and increased feature adoption.",
+          "Training and continuous development of internal teams (N1, N2, Commercial, Implementation), ensuring alignment with service and operation best practices.",
+          "On-site support for strategic and critical clients, ensuring speed, quality support, and maintenance of long-term relationships.",
+          "Specialized technical support for Level 1 and 2 teams, acting as an escalation point for complex incidents and recurring problems.",
+          "Interface with development, QA, infrastructure teams, and external vendors for deployment tracking, improvement validation, bug fixes, and new production implementations.",
+          "Participation in root cause analysis (RCA) of incidents and definition of preventive and corrective actions.",
+          "Contribution to internal process improvement projects (ITIL/best practices), aiming at service standardization, rework reduction, and operational efficiency gains."
+        ]
+      },
+      "exp3": {
+        "cargo": "Service Desk Analyst",
+        "empresa": "Dígitro Tecnologia",
+        "localizacao": "Florianópolis",
+        "periodo": "2018 – 2020",
+        "atividades": [
+          "Technical support and customer service for telecommunications solutions, ensuring high satisfaction levels and SLA compliance.",
+          "Handling Level 1 and 2 tickets, diagnosing and resolving incidents and requests in PABX/VoIP telephony environment.",
+          "Maintenance and troubleshooting of telephony systems, including log analysis, service monitoring, and validation of integrations with other systems.",
+          "Administration and support of SQL Server databases and integrated applications, including query execution for consultations, adjustments, and data analysis.",
+          "Support in version update activities, post-implementation testing, and validation of fixes with the client.",
+          "Detailed recording of incidents, problems, and solutions in ITSM tool, feeding the internal knowledge base.",
+          "Escalation of tickets to development and infrastructure teams when necessary, following the lifecycle until final resolution.",
+          "Support in the development of standard operating procedures (SOP) for the Service Desk."
+        ]
+      },
+      "exp4": {
+        "cargo": "Service Desk Analyst",
+        "empresa": "Flex Contact Center",
+        "localizacao": "Florianópolis",
+        "periodo": "2015 – 2018",
+        "atividades": [
+          "Support and maintenance of telecommunications and VoIP systems for Contact Center operation, ensuring availability of service platforms.",
+          "Administration of Avaya equipment (configurations, monitoring, extension/URA/queue adjustments), ensuring proper functioning of voice services.",
+          "Diagnosis and resolution of network failures (LAN/WAN, VLAN, QoS for voice), in conjunction with infrastructure team when necessary.",
+          "Consultation, adjustments, and maintenance of SQL Server and PostgreSQL databases to support internal applications and operational reports.",
+          "Monitoring of service queues, voice channels, and operation indicators, acting quickly in cases of unavailability or service degradation.",
+          "Support in new client implementation activities, initial telephony configurations, and acceptance testing.",
+          "Creation and updating of technical documentation, service scripts, and internal procedures to standardize support.",
+          "On-call duty in critical situations, ensuring business continuity."
+        ]
+      },
+      "exp5": {
+        "cargo": "Technical Support",
+        "empresa": "Tríplice Consultoria",
+        "localizacao": "Florianópolis",
+        "periodo": "2014 – 2015",
+        "atividades": [
+          "Technical support service for internal and external clients, by phone, remote, and on-site.",
+          "Preventive and corrective maintenance of workstations, peripherals, and network equipment.",
+          "Support in implementation and configuration of corporate systems used by clients.",
+          "Registration, tracking, and closure of tickets in Service Desk tool, respecting deadlines and priorities.",
+          "Development of small guides and tutorials for end users, aiming to reduce recurrence of doubts."
+        ]
+      },
+      "exp6": {
+        "cargo": "Technical Support Intern",
+        "empresa": "Dígitro Tecnologia",
+        "localizacao": "Florianópolis",
+        "periodo": "2012 – 2014",
+        "atividades": [
+          "Support to the support team in triage, registration, and tracking of client tickets.",
+          "Execution of basic diagnostic and troubleshooting procedures in telecommunications systems and associated infrastructure.",
+          "Installation and initial configuration of software, telephony clients, and monitoring tools.",
+          "Updating of documentation, knowledge bases, and equipment inventory.",
+          "Support to analysts in testing new versions and validation of fixes in staging environment."
+        ]
+      },
+      "exp7": {
+        "cargo": "Technical Support Operator",
+        "empresa": "RM Telecomunicações",
+        "localizacao": "São José",
+        "periodo": "2011 – 2012",
+        "atividades": [
+          "Monitoring of links, services, and telecommunications equipment, acting in rapid incident identification.",
+          "Opening and tracking of internal tickets and with carriers/partners, ensuring clear communication about status and deadlines.",
+          "First-level customer service, information gathering, execution of initial correction procedures, and escalation when necessary.",
+          "Recording of events, failures, and actions taken, contributing to process and knowledge base improvement."
+        ]
+      }
+    }
+  },
+  "education": {
+    "title": "Academic Education",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "topics": "Topics studied",
+    "degree1": {
+      "title": "Computer Networks",
+      "institution": "Centro Universitário Estácio",
+      "location": "São José",
+      "period": "Jul/2011 – Dec/2013",
+      "type": "On-site",
+      "description": "Education focused on infrastructure and administration of corporate networks, with practical and theoretical knowledge in:",
+      "topics": {
+        "networkProtocols": "Network protocols",
+        "cybersecurity": "Cybersecurity",
+        "networkInfrastructure": "Network infrastructure and architecture",
+        "networkMaintenance": "Network maintenance and support",
+        "routersSwitches": "Router and switch configuration",
+        "firewallManagement": "Firewall management",
+        "serverAdministration": "Server administration",
+        "monitoringTools": "Monitoring and performance analysis tools"
+      }
+    },
+    "degree2": {
+      "title": "Computer Science",
+      "institution": "Centro Universitário Estácio",
+      "location": "São José",
+      "period": "Jan/2025 – present",
+      "type": "In Progress",
+      "currentPhase": "Currently in the 2nd phase of the course",
+      "description": "Course focused on the development of technologies and computational solutions, with emphasis on logic, innovation, and solving complex problems. Topics studied:",
+      "topics": {
+        "softwareDevelopment": "Software and application development",
+        "aiMl": "Artificial Intelligence and Machine Learning",
+        "dataScience": "Data Science and Big Data",
+        "cybersecurity": "Cybersecurity",
+        "cloudComputing": "Cloud computing",
+        "gameDevelopment": "Digital game development",
+        "research": "Academic research and technological innovation"
+      }
+    }
+  },
+  "certifications": {
+    "title": "Courses & Certifications",
+    "categories": {
+      "basicProgramming": {
+        "title": "Basic Programming",
+        "items": {
+          "commands": "First commands",
+          "conditionals": "Conditional structures",
+          "loops": "Loop structures",
+          "variables": "Composite variables",
+          "functions": "Functions and routines"
+        }
+      },
+      "versioning": {
+        "title": "Versioning & Web Development",
+        "items": {
+          "git": "Git and GitHub",
+          "htmlCss": "HTML5 and CSS3 (5 modules – Web Development 2020)",
+          "javascript": "JavaScript",
+          "angular": "Web Development with AngularJS (Unicamp)",
+          "bestPractices": "Best Practices in Software Development (Unicamp)"
+        }
+      },
+      "programmingLanguages": {
+        "title": "Programming Languages",
+        "items": {
+          "python3": "Python 3 (Curso em Vídeo)",
+          "pythonAdvanced": "Python from Basic to Advanced, with projects and Django"
+        }
+      },
+      "devops": {
+        "title": "DevOps & Observability",
+        "items": {
+          "intro": "Introduction to DevOps",
+          "observability": "Introduction to Observability",
+          "docker": "Docker",
+          "kubernetes": "Kubernetes",
+          "jira": "Jira Software",
+          "confluence": "Confluence",
+          "bitbucket": "Bitbucket"
+        }
+      },
+      "aws": {
+        "title": "Cloud Computing – AWS",
+        "items": {
+          "practitionerEssentials": "AWS Cloud Practitioner Essentials",
+          "reStart": "AWS re/Start Graduate (AWS Cloud Practitioner Certification)",
+          "architecture": "AWS Cloud Architecture Fundamentals",
+          "mlIntro": "Introduction to Machine Learning on AWS",
+          "partner": "AWS Partner Accreditation (Technical)",
+          "learnerGuide": "AWS Builder Learner Guide",
+          "languageModels": "Building Language Models on AWS",
+          "promptEngineering": "Foundations of Prompt Engineering",
+          "bedrock": "Introduction to Amazon Bedrock",
+          "nosql": "Modern applications with NoSQL databases on AWS"
+        }
+      },
+      "other": {
+        "title": "Other Courses & Knowledge Areas",
+        "items": {
+          "english": "English – intermediate level",
+          "serverMaintenance": "Server and PABX maintenance",
+          "voipSecurity": "Introduction to IP telephony security",
+          "cloudSolutions": "Cloud solutions to boost business",
+          "voipFundamentals": "Voice over IP (VoIP) fundamentals",
+          "valueAddedServices": "Value-added services – contracting and management",
+          "lgpd": "General Data Protection Law (LGPD) – fundamentals",
+          "customerService": "Customer service excellence",
+          "qualityManagement": "Quality management in customer service",
+          "communicationPlans": "Creating effective communication plans",
+          "customerRetention": "Techniques to delight and retain customers"
+        }
+      }
+    },
+    "aluraTracks": {
+      "title": "Alura Tracks",
+      "logic": {
+        "title": "Programming Logic",
+        "description": "Essential fundamentals for beginners",
+        "items": {
+          "javascript": "Programming logic with JavaScript",
+          "fundamentals": "Essential fundamentals for beginners"
+        }
+      },
+      "java": {
+        "title": "Back-End Development with Java",
+        "description": "Complete career: from fundamentals to modern architecture, with Spring, testing, and best practices.",
+        "levels": {
+          "base": "Base: Programming fundamentals",
+          "baseDesc": "Programming fundamentals",
+          "level1": "Level 1: Web Applications with Java + Spring (OOP)",
+          "level1Desc": "Web Applications with Java + Spring (OOP)",
+          "level2": "Level 2: Secure APIs, microservices, and CI/CD",
+          "level2Desc": "Secure APIs, microservices, and CI/CD",
+          "level3": "Level 3: Reactive systems, observability, and advanced architecture",
+          "level3Desc": "Reactive systems, observability, and advanced architecture"
+        }
+      },
+      "react": {
+        "title": "Front-End Development with React",
+        "description": "Complete training to create modern, scalable, and high-performance applications.",
+        "levels": {
+          "base": "Base: Front-end fundamentals",
+          "baseDesc": "Front-end fundamentals",
+          "level1": "Level 1: React and JSX",
+          "level1Desc": "React and JSX",
+          "level2": "Level 2: TypeScript, architecture, and advanced testing",
+          "level2Desc": "TypeScript, architecture, and advanced testing",
+          "level3": "Level 3: Performance, scalability, and technical leadership",
+          "level3Desc": "Performance, scalability, and technical leadership"
+        }
+      }
+    }
+  },
+  "projects": {
+    "title": "Projects"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "I'm always open to new opportunities and interesting projects. Choose the best way to get in touch with me.",
+    "email": "caarlosandree@gmail.com",
+    "phone": "(48) 99924-4627",
+    "linkedin": "LinkedIn - /in/caarlosandree",
+    "github": "GitHub - /caarlosandree",
+    "instagram": "Instagram - @carlosasab",
+    "whatsapp": "WhatsApp - (48) 99924-4627"
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  },
+  "a11y": {
+    "changeLanguage": "Change language",
+    "toggleTheme": "Toggle theme",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "scrollToTop": "Scroll to top",
+    "currentPage": "Current page",
+    "skipToContent": "Skip to main content",
+    "viewProject": "View project",
+    "contactVia": "Contact via {{method}}",
+    "menuExpanded": "Language menu expanded",
+    "menuCollapsed": "Language menu collapsed"
+  }
+}
+

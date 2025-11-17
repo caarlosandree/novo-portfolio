@@ -1,0 +1,79 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+bin/
+dist/
+main
+server
+
+# Output of the go coverage tool
+*.out
+coverage.html
+coverage.txt
+coverage.xml
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.cursor/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Migration backups (if generated)
+migrations/backups/
+*.backup
+
+# Test files
+test-results/
+*.test.log
+
+# Air (live reload tool)
+tmp/
+

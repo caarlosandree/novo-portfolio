@@ -1,0 +1,417 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "skills": "Habilidades",
+    "education": "Formação",
+    "experience": "Experiência",
+    "certifications": "Cursos e Certificações",
+    "projects": "Projetos",
+    "contact": "Contato",
+    "fullName": "Carlos André - Full Stack Developer",
+    "shortName": "Carlos André"
+  },
+  "hero": {
+    "title": "Desenvolvedor Full Stack",
+    "subtitle": "Transformando ideias em soluções digitais inovadoras",
+    "viewProjects": "Ver Projetos",
+    "contactMe": "Entre em Contato"
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "heading": "Desenvolvedor Full Stack apaixonado por tecnologia",
+    "paragraph1": "Sou um desenvolvedor full stack com experiência na criação de aplicações web modernas, escaláveis e de alta performance. Tenho paixão por escrever código limpo, eficiente e por transformar problemas complexos em soluções simples, inovadoras e robustas.",
+    "paragraph2": "Minha jornada na programação começou por curiosidade e evoluiu para uma carreira focada em construir soluções digitais que realmente fazem diferença. Atuo com tecnologias de ponta no desenvolvimento front-end e back-end, utilizando bancos de dados relacionais e NoSQL, além de possuir experiência em Data Science e Machine Learning.",
+    "paragraph3": "Trabalho com metodologias ágeis (Scrum e Kanban) e utilizo ferramentas de gestão de projetos para garantir entregas consistentes, organizadas e alinhadas às necessidades do negócio. Estou sempre me atualizando com novas tecnologias e boas práticas para entregar soluções de alto impacto e qualidade.",
+    "paragraph4": "Além disso, tenho 14 anos de experiência em suporte, sustentação e análise de sistemas, o que me proporciona uma visão ampla de arquitetura, operações e comportamento de sistemas em produção. Também possuo 1 ano de experiência como desenvolvedor React e Node.js, fortalecendo minha atuação full stack.",
+    "paragraph5": "Atualmente, trabalho como Analista de Sistemas na NINA Tecnologia e também atuo como microempreendedor, sendo sócio, desenvolvedor full stack e tech lead na empresa de tecnologia DocSend.",
+    "features": {
+      "development": {
+        "title": "Desenvolvimento",
+        "description": "Criação de aplicações web responsivas, performáticas e escaláveis utilizando as melhores práticas do mercado"
+      },
+      "fullStack": {
+        "title": "Stack Completo",
+        "description": "Experiência em desenvolvimento full stack, desde front-end moderno até back-end robusto, passando por bancos de dados, DevOps e cloud computing"
+      },
+      "innovation": {
+        "title": "Inovação",
+        "description": "Sempre aprendendo novas tecnologias e melhores práticas para entregar soluções de qualidade que agreguem valor aos negócios"
+      }
+    }
+  },
+  "skills": {
+    "title": "Competências Técnicas",
+    "subtitle": "Domínio de diversas tecnologias e ferramentas utilizadas no mercado de tecnologia da informação",
+    "technologies": "tecnologias",
+    "technologiesCount": "{{count}} Tecnologias",
+    "categories": {
+      "frontend": "Front-end & Frameworks",
+      "backend": "Back-end",
+      "databases": "Bancos de Dados",
+      "dataScience": "Data Science & ML",
+      "devops": "DevOps & Cloud",
+      "tools": "Ferramentas & Plataformas",
+      "methodologies": "Metodologias"
+    }
+  },
+  "interpersonalSkills": {
+    "title": "Habilidades Interpessoais e de Gestão",
+    "subtitle": "Ao longo da minha trajetória, desenvolvi competências interpessoais e gerenciais essenciais para um ambiente colaborativo, produtivo e orientado a resultados",
+    "skills": "habilidades",
+    "skillsCount": "{{count}} Habilidades",
+    "categories": {
+      "communication": "Comunicação e Relacionamento",
+      "management": "Gestão e Liderança",
+      "criticalThinking": "Pensamento Crítico e Solução de Problemas",
+      "adaptability": "Adaptabilidade e Desenvolvimento Pessoal"
+    },
+    "skillItems": {
+      "effectiveCommunication": "Comunicação eficaz e escuta ativa",
+      "empathy": "Empatia e habilidade de relacionamento",
+      "negotiation": "Negociação e atendimento ao cliente",
+      "collaboration": "Colaboração e trabalho em equipe",
+      "leadership": "Liderança e visão estratégica",
+      "timeManagement": "Gestão do tempo e organização",
+      "strategicMeetings": "Condução de reuniões estratégicas",
+      "actionPlans": "Elaboração de planos de ação personalizados para clientes",
+      "teamTraining": "Capacitação contínua da equipe",
+      "analyticalThinking": "Pensamento analítico e crítico",
+      "problemSolving": "Resolução de problemas com foco em resultados",
+      "creativity": "Criatividade e inovação",
+      "attentionToDetail": "Atenção aos detalhes",
+      "proactivity": "Proatividade e flexibilidade",
+      "continuousLearning": "Capacidade de aprendizado contínuo",
+      "adaptabilityLearning": "Adaptabilidade e aprendizado ágil"
+    }
+  },
+  "experience": {
+    "title": "Experiência Profissional",
+    "subtitle": "Minha trajetória profissional e principais conquistas",
+    "activities": "Principais atividades e responsabilidades",
+    "location": "Localização",
+    "period": "Período",
+    "current": "atual",
+    "present": "presente",
+    "experiences": {
+      "exp0": {
+        "cargo": "Desenvolvedor FullStack | Tech Lead | Sócio/Fundador",
+        "empresa": "DocSend",
+        "localizacao": "Florianópolis",
+        "periodo": "2025 – atual",
+        "atividades": [
+          "Atuação como único desenvolvedor da empresa, responsável de ponta a ponta pelo ciclo de vida do produto (conceito, arquitetura, desenvolvimento, deploy, monitoramento e sustentação).",
+          "Liderança técnica como Tech Lead, definindo arquitetura, padrões de código, stack tecnológica e boas práticas de desenvolvimento para a plataforma.",
+          "Desenvolvimento de uma plataforma multitenant de gestão contábil, atendendo múltiplos escritórios/empresas dentro de uma mesma infraestrutura, com isolamento lógico de dados e configurações.",
+          "Construção de interfaces modernas e responsivas utilizando React + Vite e Material UI, com foco em usabilidade para rotinas contábeis (lançamentos, documentos, relatórios, integrações).",
+          "Implementação de APIs e serviços backend em Node.js e Java, seguindo boas práticas de arquitetura (REST, camadas, autenticação/autorização) e mantendo a segurança dos dados fiscais e contábeis.",
+          "Modelagem e manutenção do banco de dados PostgreSQL 18, incluindo estrutura de dados multitenant, otimização de consultas e criação de índices para garantir performance em volume crescente de informações.",
+          "Uso de Google Cloud (Cloud Run, Firebase, Cloud SQL) para deploy, escalabilidade e observabilidade do sistema, configurando ambientes, variáveis de ambiente, logs e monitoramento.",
+          "Definição e manutenção de pipelines de CI/CD, automatizando build, testes e deploy das aplicações, reduzindo erros manuais e acelerando a entrega de novas funcionalidades.",
+          "Implementação de mecanismos de autenticação, controle de acesso e segurança de dados sensíveis, considerando requisitos de compliance e sigilo de informações contábeis.",
+          "Criação de integrações com serviços externos (por exemplo, sistemas fiscais, emissão de documentos, providers de autenticação), incluindo consumo e disponibilização de APIs.",
+          "Definição e acompanhamento de métricas de uso da plataforma (engajamento, tempo de resposta, erros, custos de infraestrutura), apoiando a tomada de decisão sobre roadmap e otimização.",
+          "Criação de documentação técnica (arquitetura, endpoints, processos de deploy e operação) e material de apoio para clientes e equipe de negócio.",
+          "Participação ativa nas decisões estratégicas da empresa como sócio/fundador, contribuindo na definição de modelo de negócio, priorização de funcionalidades e visão de produto."
+        ]
+      },
+      "exp1": {
+        "cargo": "Analista de Sustentação Pleno",
+        "empresa": "Nina Tecnologia",
+        "localizacao": "Palhoça",
+        "periodo": "2025 – atual",
+        "atividades": [
+          "Criação e manutenção de fluxos conversacionais e chatbots na plataforma NINA, utilizando React Flow, scripts em JavaScript e elaboração de prompts para integrações de chatbot com IA (modelos de linguagem e serviços cognitivos).",
+          "Análise de dados e criação de relatórios utilizando Metabase e SQL, gerando insights para áreas de negócio, acompanhamento de performance dos bots e identificação de oportunidades de melhoria.",
+          "Análise e resolução de bugs e incidentes críticos em ambiente de produção, garantindo a estabilidade, disponibilidade e desempenho da plataforma.",
+          "Monitoramento proativo de indicadores de saúde do ambiente (logs, alarmes, métricas de performance e uso dos fluxos de chatbot) para antecipar falhas e minimizar impactos ao cliente.",
+          "Condução de reuniões técnicas e estratégicas com clientes, levantamento de necessidades, definição de escopo e elaboração de planos de ação personalizados para evolução das jornadas conversacionais.",
+          "Criação e atualização de documentação técnica, manuais internos, base de conhecimento e procedimentos de troubleshooting, reduzindo o tempo médio de resolução e facilitando o repasse de conhecimento entre times.",
+          "Atuação conjunta com a equipe de Customer Success, produto e desenvolvimento para apoiar implantações, acompanhar indicadores de satisfação e priorizar melhorias e novas funcionalidades da plataforma NINA.",
+          "Gestão e sustentação da plataforma NINA no pós-implantação, com foco em melhoria contínua da experiência do usuário final e dos clientes corporativos.",
+          "Suporte técnico especializado para equipes técnicas dos clientes, apoiando na construção de novos projetos, integrações e implementação de novas features e facilidades.",
+          "Análise de integrações com serviços de terceiros, incluindo estudo e testes de APIs, validação de requisitos técnicos e apoio na definição de escopo de desenvolvimento.",
+          "Participação na análise de causa raiz (RCA) de incidentes, definição e acompanhamento de ações preventivas e corretivas, visando redução de recorrências.",
+          "Contribuição em projetos de melhoria de processos internos baseados em boas práticas (como ITIL), com foco em padronização de atendimentos, melhoria de fluxo entre times e ganho de eficiência operacional.",
+          "Colaboração na evolução de padrões de monitoração, observabilidade e logging da plataforma para facilitar diagnóstico e tomada de decisão em produção."
+        ]
+      },
+      "exp2": {
+        "cargo": "Analista de Operações e Suporte Pleno",
+        "empresa": "Intelbras",
+        "localizacao": "São José",
+        "periodo": "2020 – 2025",
+        "atividades": [
+          "Análise e resolução de bugs e incidentes críticos em ambiente de produção, garantindo a estabilidade, disponibilidade e desempenho do produto.",
+          "Monitoramento proativo de indicadores de saúde do ambiente (logs, alarmes, métricas de performance) para antecipar falhas e minimizar impactos ao cliente.",
+          "Condução de reuniões estratégicas com clientes, entendimento de necessidades de negócio e elaboração de planos de ação personalizados.",
+          "Criação e atualização de documentação técnica, manuais internos, base de conhecimento (KCS) e procedimentos de troubleshooting para otimizar o fluxo de atendimento e reduzir tempo médio de resolução (MTTR).",
+          "Atuação conjunta com a equipe de Customer Success e demais áreas de negócio para apoiar implantações, acompanhar indicadores de satisfação (NPS/CSAT) e contribuir com a priorização de melhorias e novas funcionalidades.",
+          "Gestão do produto WideVoice (PABX Cloud) no pós-venda, com foco em melhoria contínua da experiência do cliente, redução de churn e aumento de adoção das funcionalidades.",
+          "Treinamento e capacitação contínua das equipes internas (N1, N2, Comercial, Implantação), assegurando alinhamento com melhores práticas de atendimento e operação.",
+          "Atendimento presencial a clientes estratégicos e críticos, garantindo rapidez, qualidade no suporte e manutenção de relacionamentos de longo prazo.",
+          "Suporte técnico especializado para equipes de Nível 1 e 2, atuando como ponto de escalonamento em incidentes complexos e problemas recorrentes.",
+          "Interface com times de desenvolvimento, QA, infraestrutura e fornecedores externos para acompanhamento de deploys, validação de melhorias, correções de bugs e novas implementações em produção.",
+          "Participação na análise de causa raiz (RCA) de incidentes e na definição de ações preventivas e corretivas.",
+          "Contribuição em projetos de melhoria de processos internos (ITIL/boas práticas), visando padronização de atendimentos, redução de retrabalho e ganho de eficiência operacional."
+        ]
+      },
+      "exp3": {
+        "cargo": "Analista de Service Desk",
+        "empresa": "Dígitro Tecnologia",
+        "localizacao": "Florianópolis",
+        "periodo": "2018 – 2020",
+        "atividades": [
+          "Suporte técnico e atendimento ao cliente para soluções de telecomunicação, garantindo alto nível de satisfação e cumprimento de SLAs.",
+          "Atendimento de chamados de Nível 1 e 2, diagnóstico e solução de incidentes e requisições em ambiente de telefonia PABX/VoIP.",
+          "Manutenção e troubleshooting em sistemas de telefonia, incluindo análise de logs, monitoração de serviços e validação de integrações com outros sistemas.",
+          "Administração e suporte de bancos de dados SQL Server e aplicações integradas, incluindo execução de queries para consultas, ajustes e análises de dados.",
+          "Apoio em atividades de atualização de versão, testes pós-implantação e validação de correções junto ao cliente.",
+          "Registro detalhado de incidentes, problemas e soluções na ferramenta de ITSM, alimentando a base de conhecimento interna.",
+          "Escalonamento de chamados para times de desenvolvimento e infraestrutura quando necessário, acompanhando o ciclo de vida até a resolução final.",
+          "Apoio na elaboração de procedimentos operacionais padrão (POP) para o Service Desk."
+        ]
+      },
+      "exp4": {
+        "cargo": "Analista de Service Desk",
+        "empresa": "Flex Contact Center",
+        "localizacao": "Florianópolis",
+        "periodo": "2015 – 2018",
+        "atividades": [
+          "Suporte e manutenção de sistemas de telecomunicação e VoIP para operação de Contact Center, garantindo disponibilidade das plataformas de atendimento.",
+          "Administração de equipamentos Avaya (configurações, monitoração, ajustes de ramais/URAs/filas), assegurando o correto funcionamento dos serviços de voz.",
+          "Diagnóstico e resolução de falhas em rede (LAN/WAN, VLAN, QoS para voz), em conjunto com a equipe de infraestrutura quando necessário.",
+          "Consulta, ajustes e manutenção em bancos de dados SQL Server e PostgreSQL para suporte às aplicações internas e relatórios operacionais.",
+          "Monitoramento de filas de atendimento, canais de voz e indicadores de operação, atuando rapidamente em casos de indisponibilidade ou degradação de serviço.",
+          "Apoio em atividades de implantação de novos clientes, configurações iniciais de telefonia e testes de homologação.",
+          "Criação e atualização de documentação técnica, scripts de atendimento e procedimentos internos para padronizar o suporte.",
+          "Atuação em regime de plantão em situações críticas, garantindo a continuidade do negócio."
+        ]
+      },
+      "exp5": {
+        "cargo": "Suporte Técnico",
+        "empresa": "Tríplice Consultoria",
+        "localizacao": "Florianópolis",
+        "periodo": "2014 – 2015",
+        "atividades": [
+          "Atendimento de suporte técnico a clientes internos e externos, por telefone, remoto e presencial.",
+          "Manutenção preventiva e corretiva de estações de trabalho, periféricos e equipamentos de rede.",
+          "Apoio em implantação e configuração de sistemas corporativos utilizados pelos clientes.",
+          "Registro, acompanhamento e encerramento de chamados em ferramenta de Service Desk, respeitando prazos e prioridades.",
+          "Elaboração de pequenos guias e tutoriais para usuários finais, visando reduzir recorrência de dúvidas."
+        ]
+      },
+      "exp6": {
+        "cargo": "Estagiário de Suporte Técnico",
+        "empresa": "Dígitro Tecnologia",
+        "localizacao": "Florianópolis",
+        "periodo": "2012 – 2014",
+        "atividades": [
+          "Apoio à equipe de suporte na triagem, registro e acompanhamento de chamados de clientes.",
+          "Execução de procedimentos básicos de diagnóstico e troubleshooting em sistemas de telecomunicação e infraestrutura associada.",
+          "Instalação e configuração inicial de softwares, clientes de telefonia e ferramentas de monitoramento.",
+          "Atualização de documentação, bases de conhecimento e inventário de equipamentos.",
+          "Suporte aos analistas em testes de novas versões e validação de correções em ambiente de homologação."
+        ]
+      },
+      "exp7": {
+        "cargo": "Operador de Suporte Técnico",
+        "empresa": "RM Telecomunicações",
+        "localizacao": "São José",
+        "periodo": "2011 – 2012",
+        "atividades": [
+          "Monitoramento de links, serviços e equipamentos de telecomunicações, atuando na identificação rápida de incidentes.",
+          "Abertura e acompanhamento de chamados internos e com operadoras/parceiros, garantindo comunicação clara sobre status e prazos.",
+          "Atendimento de primeiro nível a clientes, coleta de informações, execução de procedimentos iniciais de correção e escalonamento quando necessário.",
+          "Registro de eventos, falhas e ações tomadas, contribuindo para a melhoria dos processos e da base de conhecimento."
+        ]
+      }
+    }
+  },
+  "education": {
+    "title": "Formação Acadêmica",
+    "completed": "Concluído",
+    "inProgress": "Em andamento",
+    "topics": "Conteúdos estudados",
+    "degree1": {
+      "title": "Redes de Computadores",
+      "institution": "Centro Universitário Estácio",
+      "location": "São José",
+      "period": "jul/2011 – dez/2013",
+      "type": "Presencial",
+      "description": "Formação focada em infraestrutura e administração de redes corporativas, com conhecimentos práticos e teóricos em:",
+      "topics": {
+        "networkProtocols": "Protocolos de rede",
+        "cybersecurity": "Segurança cibernética",
+        "networkInfrastructure": "Infraestrutura e arquitetura de redes",
+        "networkMaintenance": "Manutenção e suporte a redes",
+        "routersSwitches": "Configuração de roteadores e switches",
+        "firewallManagement": "Gerenciamento de firewalls",
+        "serverAdministration": "Administração de servidores",
+        "monitoringTools": "Ferramentas de monitoramento e análise de desempenho"
+      }
+    },
+    "degree2": {
+      "title": "Ciências da Computação",
+      "institution": "Centro Universitário Estácio",
+      "location": "São José",
+      "period": "jan/2025 – atual",
+      "type": "Em andamento",
+      "currentPhase": "Atualmente na 2ª fase do curso",
+      "description": "Curso voltado para o desenvolvimento de tecnologias e soluções computacionais, com foco em lógica, inovação e resolução de problemas complexos. Conteúdos estudados:",
+      "topics": {
+        "softwareDevelopment": "Desenvolvimento de software e aplicações",
+        "aiMl": "Inteligência Artificial e Machine Learning",
+        "dataScience": "Ciência de Dados e Big Data",
+        "cybersecurity": "Segurança cibernética",
+        "cloudComputing": "Computação em nuvem",
+        "gameDevelopment": "Desenvolvimento de jogos digitais",
+        "research": "Pesquisa acadêmica e inovação tecnológica"
+      }
+    }
+  },
+  "certifications": {
+    "title": "Cursos e Certificações",
+    "categories": {
+      "basicProgramming": {
+        "title": "Programação Básica",
+        "items": {
+          "commands": "Primeiros comandos",
+          "conditionals": "Estruturas condicionais",
+          "loops": "Estruturas de repetição",
+          "variables": "Variáveis compostas",
+          "functions": "Funções e rotinas"
+        }
+      },
+      "versioning": {
+        "title": "Versionamento e Desenvolvimento Web",
+        "items": {
+          "git": "Git e GitHub",
+          "htmlCss": "HTML5 e CSS3 (5 módulos – Desenvolvimento Web 2020)",
+          "javascript": "JavaScript",
+          "angular": "Desenvolvimento Web com AngularJS (Unicamp)",
+          "bestPractices": "Boas Práticas em Desenvolvimento de Software (Unicamp)"
+        }
+      },
+      "programmingLanguages": {
+        "title": "Linguagens de Programação",
+        "items": {
+          "python3": "Python 3 (Curso em Vídeo)",
+          "pythonAdvanced": "Python do Básico ao Avançado, com projetos e Django"
+        }
+      },
+      "devops": {
+        "title": "DevOps & Observabilidade",
+        "items": {
+          "intro": "Introdução ao DevOps",
+          "observability": "Introdução à Observabilidade",
+          "docker": "Docker",
+          "kubernetes": "Kubernetes",
+          "jira": "Jira Software",
+          "confluence": "Confluence",
+          "bitbucket": "Bitbucket"
+        }
+      },
+      "aws": {
+        "title": "Cloud Computing – AWS",
+        "items": {
+          "practitionerEssentials": "AWS Cloud Practitioner Essentials",
+          "reStart": "AWS re/Start Graduate (Certificação AWS Cloud Practitioner)",
+          "architecture": "Fundamentos de Arquitetura de Nuvem AWS",
+          "mlIntro": "Introdução ao Machine Learning na AWS",
+          "partner": "AWS Partner Accreditation (Technical)",
+          "learnerGuide": "AWS Builder Learner Guide",
+          "languageModels": "Building Language Models on AWS",
+          "promptEngineering": "Foundations of Prompt Engineering",
+          "bedrock": "Introdução ao Amazon Bedrock",
+          "nosql": "Aplicações modernas com bancos NoSQL na AWS"
+        }
+      },
+      "other": {
+        "title": "Outros Cursos e Áreas de Conhecimento",
+        "items": {
+          "english": "Inglês – nível intermediário",
+          "serverMaintenance": "Manutenção de servidores e PABX",
+          "voipSecurity": "Introdução à segurança em telefonia IP",
+          "cloudSolutions": "Soluções em nuvem para impulsionar negócios",
+          "voipFundamentals": "Fundamentos de Voz sobre IP (VoIP)",
+          "valueAddedServices": "Serviços de valor agregado – contratação e gestão",
+          "lgpd": "Lei Geral de Proteção de Dados (LGPD) – fundamentos",
+          "customerService": "Atendimento ao cliente com excelência",
+          "qualityManagement": "Gestão da qualidade no atendimento",
+          "communicationPlans": "Elaboração de planos de comunicação eficazes",
+          "customerRetention": "Técnicas para encantar e fidelizar clientes"
+        }
+      }
+    },
+    "aluraTracks": {
+      "title": "Trilhas da Alura",
+      "logic": {
+        "title": "Lógica de Programação",
+        "description": "Fundamentos essenciais para iniciantes",
+        "items": {
+          "javascript": "Lógica de programação com JavaScript",
+          "fundamentals": "Fundamentos essenciais para iniciantes"
+        }
+      },
+      "java": {
+        "title": "Desenvolvimento Back-End com Java",
+        "description": "Carreira completa: dos fundamentos à arquitetura moderna, com Spring, testes e boas práticas.",
+        "levels": {
+          "base": "Base: Fundamentos da programação",
+          "baseDesc": "Fundamentos da programação",
+          "level1": "Nível 1: Aplicações Web com Java + Spring (POO)",
+          "level1Desc": "Aplicações Web com Java + Spring (POO)",
+          "level2": "Nível 2: APIs seguras, microsserviços e CI/CD",
+          "level2Desc": "APIs seguras, microsserviços e CI/CD",
+          "level3": "Nível 3: Sistemas reativos, observabilidade e arquitetura avançada",
+          "level3Desc": "Sistemas reativos, observabilidade e arquitetura avançada"
+        }
+      },
+      "react": {
+        "title": "Desenvolvimento Front-End com React",
+        "description": "Formação completa para criar aplicações modernas, escaláveis e de alta performance.",
+        "levels": {
+          "base": "Base: Fundamentos do front-end",
+          "baseDesc": "Fundamentos do front-end",
+          "level1": "Nível 1: React e JSX",
+          "level1Desc": "React e JSX",
+          "level2": "Nível 2: TypeScript, arquitetura e testes avançados",
+          "level2Desc": "TypeScript, arquitetura e testes avançados",
+          "level3": "Nível 3: Performance, escalabilidade e liderança técnica",
+          "level3Desc": "Performance, escalabilidade e liderança técnica"
+        }
+      }
+    }
+  },
+  "projects": {
+    "title": "Projetos"
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Estou sempre aberto a novas oportunidades e projetos interessantes. Escolha a melhor forma de entrar em contato comigo.",
+    "email": "caarlosandree@gmail.com",
+    "phone": "(48) 99924-4627",
+    "linkedin": "LinkedIn - /in/caarlosandree",
+    "github": "GitHub - /caarlosandree",
+    "instagram": "Instagram - @carlosasab",
+    "whatsapp": "WhatsApp - (48) 99924-4627"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados"
+  },
+  "a11y": {
+    "changeLanguage": "Alterar idioma",
+    "toggleTheme": "Alternar tema",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "scrollToTop": "Voltar ao topo",
+    "currentPage": "Página atual",
+    "skipToContent": "Pular para o conteúdo principal",
+    "viewProject": "Ver projeto",
+    "contactVia": "Entrar em contato via {{method}}",
+    "menuExpanded": "Menu de idiomas expandido",
+    "menuCollapsed": "Menu de idiomas recolhido"
+  }
+}
+
