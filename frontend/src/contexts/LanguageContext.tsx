@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, useMemo, type ReactNode } from 'react'
 import { portfolioApi } from '@/services/api'
 
 type Language = 'pt-BR' | 'en' | 'es'
@@ -108,14 +108,18 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     return value as string
   }, [translations])
 
-  // Garantir que o contexto sempre tenha um valor válido
-  const contextValue: LanguageContextType = {
-    language,
-    changeLanguage,
-    t,
-    translations,
-    loading,
-  }
+  // Memoizar o valor do contexto para evitar re-renders desnecessários
+  // Só recria quando language, translations ou loading mudarem
+  const contextValue = useMemo<LanguageContextType>(
+    () => ({
+      language,
+      changeLanguage,
+      t,
+      translations,
+      loading,
+    }),
+    [language, changeLanguage, t, translations, loading]
+  )
 
   return (
     <LanguageContext.Provider value={contextValue}>

@@ -43,6 +43,14 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2, // Múltiplas passadas para melhor compressão
+        unsafe: true,
+        unsafe_comps: true,
+        unsafe_math: true,
+        unsafe_methods: true,
+      },
+      format: {
+        comments: false, // Remove comentários
       },
     } as Record<string, unknown>,
     cssCodeSplit: true,
@@ -51,10 +59,17 @@ export default defineConfig({
     modulePreload: {
       polyfill: true,
     },
+    // Otimizações adicionais
+    reportCompressedSize: true,
+    assetsInlineLimit: 4096, // Inline assets menores que 4KB
   },
   optimizeDeps: {
     include: ['react', 'react-dom', '@mui/material', '@mui/icons-material', 'framer-motion'],
     exclude: [],
+    // Força esbuild para melhor performance
+    esbuildOptions: {
+      target: 'esnext',
+    },
   },
   server: {
     port: 5173,

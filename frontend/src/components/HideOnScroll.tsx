@@ -1,8 +1,8 @@
-import type { ReactElement } from 'react'
+import type { ReactNode } from 'react'
 import { Slide, useScrollTrigger, Box } from '@mui/material'
 
 interface HideOnScrollProps {
-  children: ReactElement
+  children: ReactNode
 }
 
 export const HideOnScroll = ({ children }: HideOnScrollProps) => {

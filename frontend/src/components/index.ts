@@ -14,4 +14,5 @@ export { CertificationsSection } from './CertificationsSection'
 export { ContactSection } from './ContactSection'
 export { ContactCard } from './ContactCard'
 export { Footer } from './Footer'
+export { LazyImage } from './LazyImage'
 
