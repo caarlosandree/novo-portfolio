@@ -278,12 +278,14 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    width: 64,
                     minWidth: 64,
                     height: 64,
                     borderRadius: 2,
                     backgroundColor: `${sectionColor.main}15`,
                     color: sectionColor.main,
                     overflow: 'hidden',
+                    flexShrink: 0,
                   }}
                 >
                   {experiencia.empresa === 'Nina Tecnologia' ? (
@@ -294,8 +296,10 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                       loading="lazy"
                       decoding="async"
                       sx={{
-                        width: '100%',
-                        height: '100%',
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        width: 'auto',
+                        height: 'auto',
                         objectFit: 'contain',
                         p: 1,
                       }}
@@ -308,8 +312,10 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                       loading="lazy"
                       decoding="async"
                       sx={{
-                        width: '100%',
-                        height: '100%',
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        width: 'auto',
+                        height: 'auto',
                         objectFit: 'contain',
                         p: 1,
                       }}
