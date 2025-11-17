@@ -4,6 +4,45 @@ import { useState, useEffect, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 
+// Função auxiliar para converter hex para RGB
+const hexToRgb = (hex: string): string => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (!result) return '0, 0, 0'
+  const r = parseInt(result[1], 16)
+  const g = parseInt(result[2], 16)
+  const b = parseInt(result[3], 16)
+  return `${r}, ${g}, ${b}`
+}
+
+// Função para escurecer uma cor e garantir contraste adequado em fundo branco
+const darkenForContrast = (hex: string, factor: number = 0.6): string => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (!result) return '#000000'
+  
+  let r = parseInt(result[1], 16)
+  let g = parseInt(result[2], 16)
+  let b = parseInt(result[3], 16)
+  
+  // Escurece a cor multiplicando por um fator
+  r = Math.floor(r * factor)
+  g = Math.floor(g * factor)
+  b = Math.floor(b * factor)
+  
+  // Garante que a cor seja escura o suficiente para contraste (mínimo de 30% de luminosidade)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+  if (luminance > 0.3) {
+    // Se ainda estiver muito claro, escurece mais
+    r = Math.floor(r * 0.5)
+    g = Math.floor(g * 0.5)
+    b = Math.floor(b * 0.5)
+  }
+  
+  return `#${[r, g, b].map(x => {
+    const hex = x.toString(16)
+    return hex.length === 1 ? '0' + hex : hex
+  }).join('')}`
+}
+
 interface HeroSectionProps {
   onNavigate: (sectionId: string) => void
 }
@@ -176,14 +215,19 @@ export const HeroSection = memo(({ onNavigate }: HeroSectionProps) => {
               whileTap={{ scale: 0.95 }}
               sx={{
                 backgroundColor: '#FFFFFF',
-                color: '#01579B',
+                color: darkenForContrast(theme.palette.primary.main),
                 fontWeight: 700,
                 fontSize: '1rem',
                 px: 5,
                 py: 1.8,
                 borderRadius: 3,
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
+                boxShadow: `0 8px 24px rgba(${hexToRgb(theme.palette.primary.main)}, 0.4)`,
                 border: '2px solid rgba(255, 255, 255, 0.3)',
+                '&:hover': {
+                  boxShadow: `0 12px 32px rgba(${hexToRgb(theme.palette.primary.main)}, 0.5)`,
+                  backgroundColor: '#FFFFFF',
+                  color: darkenForContrast(theme.palette.primary.main, 0.5),
+                },
                 '&:focus-visible': {
                   outline: '3px solid',
                   outlineColor: '#FFFFFF',
@@ -212,6 +256,11 @@ export const HeroSection = memo(({ onNavigate }: HeroSectionProps) => {
                 borderRadius: 3,
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(10px)',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  borderColor: 'rgba(255, 255, 255, 0.7)',
+                  boxShadow: `0 8px 24px rgba(${hexToRgb(theme.palette.primary.main)}, 0.3)`,
+                },
                 '&:focus-visible': {
                   outline: '3px solid',
                   outlineColor: '#FFFFFF',

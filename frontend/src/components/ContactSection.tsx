@@ -2,8 +2,10 @@ import { Box, Container, Typography, useTheme, Tooltip } from '@mui/material'
 import { Email, Phone, LinkedIn, GitHub, WhatsApp } from '@mui/icons-material'
 import { SiInstagram } from 'react-icons/si'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { sectionColors } from '@/utils/sectionColors'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
+import { getSectionColors } from '@/utils/sectionColors'
 import type { Contact } from '@/types'
 
 interface ContactIconProps {
@@ -96,7 +98,9 @@ const iconMap: Record<string, React.ReactElement> = {
 
 export const ContactSection = ({ contact }: ContactSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
   const { t } = useLanguage()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.contact
 
   if (!contact) return null
@@ -126,8 +130,8 @@ export const ContactSection = ({ contact }: ContactSectionProps) => {
         py: 12, 
         position: 'relative',
         backgroundColor: theme.palette.mode === 'dark' 
-          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(21, 101, 192, 0.03) 100%)`
-          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(21, 101, 192, 0.05) 100%)`,
+          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgDark} 100%)`
+          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgLight} 100%)`,
       }}
     >
       <Container maxWidth="md">

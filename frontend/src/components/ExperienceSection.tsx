@@ -1,10 +1,11 @@
 import { Box, Container, Typography, Card, Chip, useTheme, Link } from '@mui/material'
 import { Work, LocationOn, CalendarToday } from '@mui/icons-material'
 import { motion } from 'framer-motion'
-import { useMemo, useCallback, useEffect } from 'react'
+import { useMemo, useCallback } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
 import type { ExperienciaProfissional } from '@/types'
-import { sectionColors } from '@/utils/sectionColors'
+import { getSectionColors } from '@/utils/sectionColors'
 import logoNina from '@/assets/img/logo-nina.png'
 import logoIntelbras from '@/assets/img/logo-intelbras.png'
 
@@ -14,27 +15,11 @@ interface ExperienceSectionProps {
 
 export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
   const { t, translations, language, loading: translationsLoading } = useLanguage()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.experience
   
-  // Log quando o componente renderiza
-  console.log(`[ExperienceSection] Componente renderizado - idioma: ${language}, tem traduções: ${!!translations}, loading: ${translationsLoading}`)
-  
-  // Log quando as traduções ou idioma mudam
-  useEffect(() => {
-    console.log(`[ExperienceSection] useEffect - Traduções ou idioma mudaram:`, {
-      language,
-      hasTranslations: !!translations,
-      translationsLoading,
-      translationsKeys: translations && typeof translations === 'object' 
-        ? Object.keys(translations) 
-        : [],
-      experienceKeys: translations && typeof translations === 'object' && 'experience' in translations
-        ? Object.keys((translations as Record<string, unknown>).experience as Record<string, unknown> || {})
-        : []
-    })
-  }, [translations, language, translationsLoading])
-
   // Filtrar experiências que têm empresa e período (não mostrar a genérica)
   const experienciasCompletas = useMemo(
     () => experiencias.filter(exp => exp.empresa && exp.periodo),
@@ -54,26 +39,15 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
 
   // Mapear experiências para usar traduções da API baseado na empresa
   const experienciasTraduzidas = useMemo(() => {
-    console.log(`[ExperienceSection] Recalculando experiências traduzidas - idioma: ${language}, loading: ${translationsLoading}, tem traduções: ${!!translations}`)
-    
     // Se o idioma é pt-BR, retorna experiências originais (já vem como padrão do endpoint /experiences)
     if (language === 'pt-BR') {
-      console.log(`[ExperienceSection] Idioma é pt-BR, usando experiências originais`)
       return experienciasCompletas
     }
 
     // Se ainda está carregando traduções ou não há traduções, retorna experiências originais temporariamente
     if (translationsLoading || !translations) {
-      console.log(`[ExperienceSection] Traduções não disponíveis (loading: ${translationsLoading}, translations: ${!!translations}), usando originais`)
       return experienciasCompletas
     }
-
-    console.log(`[ExperienceSection] Aplicando traduções. Estrutura de traduções:`, {
-      temExperience: !!(translations && typeof translations === 'object' && 'experience' in translations),
-      experienceKeys: translations && typeof translations === 'object' && 'experience' in translations
-        ? Object.keys((translations as Record<string, unknown>).experience as Record<string, unknown> || {})
-        : []
-    })
 
     const empresaToExpKey: Record<string, string> = {
       'DocSend': 'exp0',
@@ -92,13 +66,6 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
         const expPath = `experience.experiences.${expKey}`
         const translatedExp = getNestedValue(translations, expPath)
         
-        console.log(`[ExperienceSection] Processando ${exp.empresa} (${expKey}):`, {
-          expPath,
-          temTraducao: !!translatedExp,
-          tipoTraducao: typeof translatedExp,
-          traducao: translatedExp
-        })
-        
         if (translatedExp && typeof translatedExp === 'object' && !Array.isArray(translatedExp)) {
           const translatedExpObj = translatedExp as Record<string, unknown>
           
@@ -107,13 +74,6 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
           
           // Tenta acessar atividades da tradução
           const atividadesFromTranslation = translatedExpObj.atividades
-          
-          console.log(`[ExperienceSection] Atividades para ${exp.empresa}:`, {
-            original: exp.atividades.length,
-            traduzida: atividadesFromTranslation,
-            tipoTraducao: typeof atividadesFromTranslation,
-            eArray: Array.isArray(atividadesFromTranslation)
-          })
           
           if (atividadesFromTranslation !== null && atividadesFromTranslation !== undefined) {
             if (Array.isArray(atividadesFromTranslation)) {
@@ -129,10 +89,7 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
               
               // Só usa as traduções se encontrou pelo menos uma atividade válida
               if (atividadesFiltradas.length > 0) {
-                console.log(`[ExperienceSection] Usando atividades traduzidas para ${exp.empresa}:`, atividadesFiltradas.length, 'atividades')
                 atividadesTraduzidas = atividadesFiltradas
-              } else {
-                console.log(`[ExperienceSection] Nenhuma atividade válida encontrada nas traduções para ${exp.empresa}, usando original`)
               }
             } else if (atividadesFromTranslation && typeof atividadesFromTranslation === 'object') {
               // Se for um objeto (caso raro), tenta converter para array ordenando pelas chaves numéricas
@@ -151,12 +108,9 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                 .map(([, valor]: [string, unknown]) => String(valor).trim())
               
               if (valores.length > 0) {
-                console.log(`[ExperienceSection] Usando atividades traduzidas (objeto) para ${exp.empresa}:`, valores.length, 'atividades')
                 atividadesTraduzidas = valores
               }
             }
-          } else {
-            console.log(`[ExperienceSection] Atividades da tradução não encontradas ou inválidas para ${exp.empresa}, usando original`)
           }
           
           return {
@@ -167,11 +121,7 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
             periodo: (typeof translatedExpObj.periodo === 'string' ? translatedExpObj.periodo : null) || exp.periodo,
             atividades: atividadesTraduzidas,
           }
-        } else {
-          console.log(`[ExperienceSection] Nenhuma tradução encontrada para ${exp.empresa} (${expKey}), usando original`)
         }
-      } else {
-        console.log(`[ExperienceSection] Chave de experiência não mapeada para ${exp.empresa}, usando original`)
       }
       return exp
     })
@@ -183,8 +133,8 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
       sx={{ 
         py: 12, 
         backgroundColor: theme.palette.mode === 'dark' 
-          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(66, 165, 245, 0.03) 100%)`
-          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(66, 165, 245, 0.05) 100%)`,
+          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgDark} 100%)`
+          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgLight} 100%)`,
         position: 'relative',
       }}
     >
@@ -419,8 +369,12 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                         size="small"
                         variant="outlined"
                         sx={{
-                          borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
-                          color: theme.palette.text.secondary,
+                          borderColor: sectionColor.main,
+                          color: sectionColor.main,
+                          '&:hover': {
+                            borderColor: sectionColor.dark,
+                            backgroundColor: `${sectionColor.main}15`,
+                          },
                         }}
                       />
                     )}
@@ -431,8 +385,12 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                         size="small"
                         variant="outlined"
                         sx={{
-                          borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
-                          color: theme.palette.text.secondary,
+                          borderColor: sectionColor.main,
+                          color: sectionColor.main,
+                          '&:hover': {
+                            borderColor: sectionColor.dark,
+                            backgroundColor: `${sectionColor.main}15`,
+                          },
                         }}
                       />
                     )}

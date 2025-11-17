@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem, useTheme as useMuiTheme } from '@mui/material'
-import { Menu as MenuIcon, LightMode, DarkMode, Language, AdminPanelSettings, Login } from '@mui/icons-material'
+import { Menu as MenuIcon, LightMode, DarkMode, Language, AdminPanelSettings, Login, Palette } from '@mui/icons-material'
 import { HideOnScroll } from './HideOnScroll'
+import { ThemeSelectorModal } from './ThemeSelectorModal'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
@@ -20,6 +21,7 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
   const [activeSection, setActiveSection] = useState<string>('inicio')
   const [displayedText, setDisplayedText] = useState('')
   const [languageAnchorEl, setLanguageAnchorEl] = useState<null | HTMLElement>(null)
+  const [themeModalOpen, setThemeModalOpen] = useState(false)
 
   const fullText = t('nav.fullName')
   const mobileText = t('nav.shortName')
@@ -69,17 +71,23 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
   }, [])
 
   const handleLanguageChange = useCallback((lang: 'pt-BR' | 'en' | 'es') => {
-    console.log(`[NavigationBar] handleLanguageChange chamado: ${language} -> ${lang}`)
     changeLanguage(lang)
     handleLanguageMenuClose()
     // Reinicia a animação de digitação quando o idioma muda
     setDisplayedText('')
-    console.log(`[NavigationBar] handleLanguageChange concluído para: ${lang}`)
-  }, [changeLanguage, handleLanguageMenuClose, language])
+  }, [changeLanguage, handleLanguageMenuClose])
 
   const handleAdminClick = useCallback(() => {
     window.location.hash = isAuthenticated ? '#/admin' : '#/login'
   }, [isAuthenticated])
+
+  const handleThemeModalOpen = useCallback(() => {
+    setThemeModalOpen(true)
+  }, [])
+
+  const handleThemeModalClose = useCallback(() => {
+    setThemeModalOpen(false)
+  }, [])
 
   const navItems = useMemo(() => [
     { id: 'inicio', label: t('nav.home') },
@@ -265,6 +273,25 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
               <Language />
             </IconButton>
             <IconButton
+              onClick={handleThemeModalOpen}
+              aria-label={t('a11y.selectTheme')}
+              sx={{
+                ml: 1,
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+                '&:hover': {
+                  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)',
+                },
+                '&:focus-visible': {
+                  outline: `2px solid ${theme.palette.primary.main}`,
+                  outlineOffset: '2px',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <Palette />
+            </IconButton>
+            <IconButton
               onClick={toggleTheme}
               aria-label={t('a11y.toggleTheme')}
               aria-pressed={mode === 'dark'}
@@ -326,6 +353,24 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
               }}
             >
               <Language />
+            </IconButton>
+            <IconButton
+              onClick={handleThemeModalOpen}
+              aria-label={t('a11y.selectTheme')}
+              sx={{
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+                '&:hover': {
+                  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)',
+                },
+                '&:focus-visible': {
+                  outline: `2px solid ${theme.palette.primary.main}`,
+                  outlineOffset: '2px',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <Palette />
             </IconButton>
             <IconButton
               onClick={toggleTheme}
@@ -432,6 +477,7 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
           </Menu>
         </Toolbar>
       </AppBar>
+      <ThemeSelectorModal open={themeModalOpen} onClose={handleThemeModalClose} />
     </HideOnScroll>
   )
 })

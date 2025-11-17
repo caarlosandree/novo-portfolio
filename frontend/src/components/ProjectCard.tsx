@@ -14,11 +14,6 @@ export const ProjectCard = memo(({ projeto, index = 0 }: ProjectCardProps) => {
   const theme = useTheme()
   const { t } = useLanguage()
 
-  // Debug: verificar se github_url está chegando
-  if (index === 0) {
-    console.log('ProjectCard - Projeto:', projeto)
-    console.log('ProjectCard - github_url:', projeto.github_url)
-  }
 
   return (
     <Box 

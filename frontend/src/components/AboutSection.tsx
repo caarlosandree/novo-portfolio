@@ -1,7 +1,9 @@
 import { Box, Container, Typography, Card, useTheme } from '@mui/material'
 import { Code, Work, TrendingUp } from '@mui/icons-material'
 import { motion } from 'framer-motion'
-import { sectionColors } from '@/utils/sectionColors'
+import { useMemo } from 'react'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
+import { getSectionColors } from '@/utils/sectionColors'
 import type { About } from '@/types'
 
 interface AboutSectionProps {
@@ -10,6 +12,8 @@ interface AboutSectionProps {
 
 export const AboutSection = ({ about }: AboutSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.about
 
   if (!about) return null
@@ -30,8 +34,8 @@ export const AboutSection = ({ about }: AboutSectionProps) => {
       sx={{ 
         py: 12, 
         backgroundColor: theme.palette.mode === 'dark' 
-          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(0, 188, 212, 0.03) 100%)`
-          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(0, 188, 212, 0.05) 100%)`,
+          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgDark} 100%)`
+          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgLight} 100%)`,
         position: 'relative',
       }}
     >

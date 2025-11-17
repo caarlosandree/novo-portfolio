@@ -1,14 +1,17 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useMemo } from 'react'
 import type { ReactNode } from 'react'
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
-import { lightTheme, darkTheme } from '@/styles/theme'
+import { getTheme, themePalettes, type ThemeName } from '@/styles/themes'
 
 type ThemeMode = 'light' | 'dark'
 
 interface ThemeContextType {
   mode: ThemeMode
+  themeName: ThemeName
   toggleTheme: () => void
+  changeTheme: (themeName: ThemeName) => void
+  availableThemes: ThemeName[]
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -23,6 +26,11 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     return savedMode || 'light'
   })
 
+  const [themeName, setThemeName] = useState<ThemeName>(() => {
+    const savedTheme = localStorage.getItem('themeName') as ThemeName
+    return savedTheme || 'blue'
+  })
+
   const toggleTheme = useCallback(() => {
     setMode((prevMode) => {
       const newMode = prevMode === 'light' ? 'dark' : 'light'
@@ -31,10 +39,17 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     })
   }, [])
 
-  const theme = mode === 'light' ? lightTheme : darkTheme
+  const changeTheme = useCallback((newThemeName: ThemeName) => {
+    setThemeName(newThemeName)
+    localStorage.setItem('themeName', newThemeName)
+  }, [])
+
+  const theme = useMemo(() => getTheme(themeName, mode), [themeName, mode])
+
+  const availableThemes = useMemo(() => Object.keys(themePalettes) as ThemeName[], [])
 
   return (
-    <ThemeContext.Provider value={{ mode, toggleTheme }}>
+    <ThemeContext.Provider value={{ mode, themeName, toggleTheme, changeTheme, availableThemes }}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         {children}

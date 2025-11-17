@@ -3,7 +3,8 @@ import type { CategoriaHabilidade } from '@/types'
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { sectionColors } from '@/utils/sectionColors'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
+import { getSectionColors } from '@/utils/sectionColors'
 import {
   People,
   BusinessCenter,
@@ -53,7 +54,9 @@ const getSkillIcon = (habilidade: string) => {
 
 export const InterpersonalSkillsSection = ({ categorias }: InterpersonalSkillsSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
   const { t } = useLanguage()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.interpersonalSkills
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 

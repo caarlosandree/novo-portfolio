@@ -403,6 +403,7 @@
   "a11y": {
     "changeLanguage": "Alterar idioma",
     "toggleTheme": "Alternar tema",
+    "selectTheme": "Selecionar tema de cores",
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu",
     "scrollToTop": "Voltar ao topo",
@@ -415,6 +416,11 @@
     "contactVia": "Entrar em contato via {{method}}",
     "menuExpanded": "Menu de idiomas expandido",
     "menuCollapsed": "Menu de idiomas recolhido"
+  },
+  "themeSelector": {
+    "title": "Selecionar Tema",
+    "subtitle": "Escolha uma paleta de cores para personalizar sua experiência",
+    "close": "Fechar"
   }
 }
 

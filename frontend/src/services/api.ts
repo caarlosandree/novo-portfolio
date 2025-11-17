@@ -129,21 +129,7 @@ export const portfolioApi = {
    */
   async getTranslations(language: string): Promise<Record<string, unknown>> {
     const endpoint = `/api/portfolio/translations/${language}`
-    const fullUrl = `${API_BASE_URL}${endpoint}`
-    console.log(`[portfolioApi] getTranslations chamado para: ${language}`)
-    console.log(`[portfolioApi] URL completa: GET ${fullUrl}`)
-    try {
-      const result = await fetchApi<Record<string, unknown>>(endpoint)
-      console.log(`[portfolioApi] Traduções recebidas para ${language}:`, {
-        hasData: !!result,
-        keys: result && typeof result === 'object' ? Object.keys(result) : [],
-        sample: result
-      })
-      return result
-    } catch (error) {
-      console.error(`[portfolioApi] Erro ao buscar traduções para ${language}:`, error)
-      throw error
-    }
+    return fetchApi<Record<string, unknown>>(endpoint)
   },
 
   /**

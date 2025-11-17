@@ -1,8 +1,10 @@
 import { Box, Container, Typography, Card, Chip, useTheme } from '@mui/material'
 import { School, CheckCircle } from '@mui/icons-material'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { sectionColors } from '@/utils/sectionColors'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
+import { getSectionColors } from '@/utils/sectionColors'
 import type { Education } from '@/types'
 
 interface EducationSectionProps {
@@ -11,7 +13,9 @@ interface EducationSectionProps {
 
 export const EducationSection = ({ educations }: EducationSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
   const { t } = useLanguage()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.education
 
   return (
@@ -20,8 +24,8 @@ export const EducationSection = ({ educations }: EducationSectionProps) => {
       sx={{ 
         py: 12, 
         backgroundColor: theme.palette.mode === 'dark' 
-          ? `linear-gradient(180deg, ${theme.palette.background.paper} 0%, rgba(92, 107, 192, 0.03) 100%)`
-          : `linear-gradient(180deg, ${theme.palette.background.paper} 0%, rgba(92, 107, 192, 0.05) 100%)`,
+          ? `linear-gradient(180deg, ${theme.palette.background.paper} 0%, ${sectionColor.bgDark} 100%)`
+          : `linear-gradient(180deg, ${theme.palette.background.paper} 0%, ${sectionColor.bgLight} 100%)`,
         position: 'relative',
       }}
     >

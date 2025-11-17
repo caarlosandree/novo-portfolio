@@ -4,7 +4,8 @@ import { SkillCard } from './SkillCard'
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { sectionColors } from '@/utils/sectionColors'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
+import { getSectionColors } from '@/utils/sectionColors'
 
 interface SkillsSectionProps {
   categorias: CategoriaHabilidade[]
@@ -12,7 +13,9 @@ interface SkillsSectionProps {
 
 export const SkillsSection = ({ categorias }: SkillsSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
   const { t } = useLanguage()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.skills
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 

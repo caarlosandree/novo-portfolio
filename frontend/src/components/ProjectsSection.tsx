@@ -4,7 +4,8 @@ import { ProjectCard } from './ProjectCard'
 import type { Projeto } from '@/types'
 import { useMemo, useState, useRef, useCallback, useEffect } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { sectionColors } from '@/utils/sectionColors'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
+import { getSectionColors } from '@/utils/sectionColors'
 import { motion } from 'framer-motion'
 
 interface ProjectsSectionProps {
@@ -13,7 +14,9 @@ interface ProjectsSectionProps {
 
 export const ProjectsSection = ({ projetos }: ProjectsSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
   const { t } = useLanguage()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.projects
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)

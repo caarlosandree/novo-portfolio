@@ -1,8 +1,10 @@
 import { Box, Container, Typography, Chip, Accordion, AccordionSummary, AccordionDetails, useTheme } from '@mui/material'
 import { School, ExpandMore, CheckCircle } from '@mui/icons-material'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { sectionColors } from '@/utils/sectionColors'
+import { useTheme as useThemeContext } from '@/contexts/ThemeContext'
+import { getSectionColors } from '@/utils/sectionColors'
 import type { CertificationCategory, CertificationTrack, TrackLevel } from '@/types'
 
 interface CertificationsSectionProps {
@@ -12,7 +14,9 @@ interface CertificationsSectionProps {
 
 export const CertificationsSection = ({ categories, tracks }: CertificationsSectionProps) => {
   const theme = useTheme()
+  const { themeName } = useThemeContext()
   const { t } = useLanguage()
+  const sectionColors = useMemo(() => getSectionColors(themeName), [themeName])
   const sectionColor = sectionColors.certifications
 
   // Mapeia categorias para o formato esperado
@@ -55,8 +59,8 @@ export const CertificationsSection = ({ categories, tracks }: CertificationsSect
       sx={{ 
         py: 12, 
         backgroundColor: theme.palette.mode === 'dark' 
-          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(126, 87, 194, 0.03) 100%)`
-          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, rgba(126, 87, 194, 0.05) 100%)`,
+          ? `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgDark} 100%)`
+          : `linear-gradient(180deg, ${theme.palette.background.default} 0%, ${sectionColor.bgLight} 100%)`,
         position: 'relative',
       }}
     >
