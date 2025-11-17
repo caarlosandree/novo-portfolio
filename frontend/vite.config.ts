@@ -44,10 +44,10 @@ export default defineConfig({
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug'],
         passes: 2, // Múltiplas passadas para melhor compressão
-        unsafe: true,
-        unsafe_comps: true,
-        unsafe_math: true,
-        unsafe_methods: true,
+        unsafe: false, // Desabilitado para evitar problemas com estilos CSS
+        unsafe_comps: false,
+        unsafe_math: false,
+        unsafe_methods: false,
       },
       format: {
         comments: false, // Remove comentários

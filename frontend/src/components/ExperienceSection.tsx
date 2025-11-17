@@ -280,7 +280,10 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                     justifyContent: 'center',
                     width: 64,
                     minWidth: 64,
+                    maxWidth: 64,
                     height: 64,
+                    minHeight: 64,
+                    maxHeight: 64,
                     borderRadius: 2,
                     backgroundColor: `${sectionColor.main}15`,
                     color: sectionColor.main,
@@ -295,12 +298,14 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                       alt="NINA Tecnologia"
                       loading="lazy"
                       decoding="async"
-                      sx={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                        width: 'auto',
-                        height: 'auto',
+                      style={{
+                        width: '100%',
+                        height: '100%',
                         objectFit: 'contain',
+                        objectPosition: 'center',
+                        display: 'block',
+                      }}
+                      sx={{
                         p: 1,
                       }}
                     />
@@ -311,12 +316,14 @@ export const ExperienceSection = ({ experiencias }: ExperienceSectionProps) => {
                       alt="Intelbras"
                       loading="lazy"
                       decoding="async"
-                      sx={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                        width: 'auto',
-                        height: 'auto',
+                      style={{
+                        width: '100%',
+                        height: '100%',
                         objectFit: 'contain',
+                        objectPosition: 'center',
+                        display: 'block',
+                      }}
+                      sx={{
                         p: 1,
                       }}
                     />

@@ -139,12 +139,27 @@ export const HeroSection = memo(({ onNavigate }: HeroSectionProps) => {
         }}
       />
 
-      <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+      <Container 
+        maxWidth="md" 
+        sx={{ 
+          position: 'relative', 
+          zIndex: 1, 
+          textAlign: 'center',
+          width: '100%',
+          px: { xs: 2, sm: 3, md: 4 },
+        }}
+      >
         <Box
           component={motion.div}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
         >
           <Box
             component={motion.div}
@@ -152,20 +167,45 @@ export const HeroSection = memo(({ onNavigate }: HeroSectionProps) => {
             animate={{ opacity: 1, scale: 1, rotateY: 0 }}
             transition={{ duration: 0.8, delay: 0.2, type: 'spring', stiffness: 100 }}
             whileHover={{ scale: 1.05, rotateY: 5 }}
+            sx={{
+              width: 180,
+              height: 180,
+              minWidth: 180,
+              minHeight: 180,
+              maxWidth: 180,
+              maxHeight: 180,
+              flexShrink: 0,
+            }}
           >
             <Avatar
               src={carlosPhoto}
               imgProps={{
                 alt: "Carlos Andree",
-                loading: "eager"
+                loading: "eager",
+                style: {
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }
               }}
               sx={{
                 width: 180,
                 height: 180,
+                minWidth: 180,
+                minHeight: 180,
+                maxWidth: 180,
+                maxHeight: 180,
                 margin: '0 auto 2.5rem',
                 border: `4px solid rgba(255, 255, 255, 0.3)`,
                 boxShadow: `0 20px 60px -12px ${theme.palette.primary.main}60, 0 0 0 1px rgba(255, 255, 255, 0.1)`,
                 willChange: 'transform',
+                flexShrink: 0,
+                '& img': {
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                },
               }}
             />
           </Box>
