@@ -77,3 +77,7 @@ test-results/
 # Air (live reload tool)
 tmp/
 
+# GitHub Actions keys
+github-actions-key.json
+*.key.json
+

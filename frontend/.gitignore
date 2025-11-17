@@ -100,3 +100,4 @@ storybook-static/
 
 # Turbo
 .turbo/
+.vercel

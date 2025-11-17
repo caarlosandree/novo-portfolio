@@ -1,0 +1,89 @@
+name: Deploy Backend to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '.github/workflows/deploy-backend.yml'
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  SERVICE_NAME: portfolio-backend
+  REGION: southamerica-east1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Autenticar no Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configurar Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configurar Docker para usar gcloud como helper
+        run: |
+          gcloud auth configure-docker gcr.io --quiet
+
+      - name: Habilitar APIs necessárias
+        run: |
+          gcloud services enable cloudbuild.googleapis.com --project=$PROJECT_ID
+          gcloud services enable run.googleapis.com --project=$PROJECT_ID
+          gcloud services enable containerregistry.googleapis.com --project=$PROJECT_ID
+
+      - name: Verificar arquivos necessários
+        run: |
+          echo "Verificando estrutura do diretório..."
+          pwd
+          ls -la
+          echo "Verificando cloudbuild.yaml..."
+          test -f cloudbuild.yaml || (echo "❌ cloudbuild.yaml não encontrado!" && exit 1)
+          echo "Verificando Dockerfile..."
+          test -f Dockerfile || (echo "❌ Dockerfile não encontrado!" && exit 1)
+          echo "Verificando cmd/server/main.go..."
+          test -f cmd/server/main.go || (echo "❌ cmd/server/main.go não encontrado!" && exit 1)
+          echo "✅ Todos os arquivos necessários encontrados!"
+
+      - name: Build e Deploy usando Cloud Build
+        run: |
+          echo "Iniciando build e deploy..."
+          gcloud builds submit \
+            --config cloudbuild.yaml \
+            --substitutions _SERVICE_NAME=$SERVICE_NAME,_REGION=$REGION \
+            --project $PROJECT_ID
+
+      - name: Obter URL do serviço
+        id: get-url
+        run: |
+          SERVICE_URL=$(gcloud run services describe $SERVICE_NAME \
+            --platform managed \
+            --region $REGION \
+            --format 'value(status.url)' \
+            --project $PROJECT_ID)
+          echo "url=$SERVICE_URL" >> $GITHUB_OUTPUT
+          echo "✅ Deploy concluído! URL: $SERVICE_URL"
+
+      - name: Health Check
+        run: |
+          sleep 10
+          SERVICE_URL="${{ steps.get-url.outputs.url }}"
+          echo "Verificando health check em: $SERVICE_URL/health"
+          curl -f "$SERVICE_URL/health" || exit 1
+          echo "✅ Health check passou!"
+
