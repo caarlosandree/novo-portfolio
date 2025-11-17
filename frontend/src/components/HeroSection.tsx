@@ -155,7 +155,10 @@ export const HeroSection = memo(({ onNavigate }: HeroSectionProps) => {
           >
             <Avatar
               src={carlosPhoto}
-              alt="Carlos Andree"
+              imgProps={{
+                alt: "Carlos Andree",
+                loading: "eager"
+              }}
               sx={{
                 width: 180,
                 height: 180,
@@ -164,7 +167,6 @@ export const HeroSection = memo(({ onNavigate }: HeroSectionProps) => {
                 boxShadow: `0 20px 60px -12px ${theme.palette.primary.main}60, 0 0 0 1px rgba(255, 255, 255, 0.1)`,
                 willChange: 'transform',
               }}
-              loading="eager"
             />
           </Box>
           <Typography
