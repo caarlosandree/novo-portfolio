@@ -1,0 +1,919 @@
+basePath: /
+definitions:
+  models.About:
+    properties:
+      features:
+        items:
+          $ref: '#/definitions/models.Feature'
+        type: array
+      heading:
+        type: string
+      paragraphs:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+    type: object
+  models.CategoriaHabilidade:
+    properties:
+      habilidades:
+        items:
+          type: string
+        type: array
+      nome:
+        type: string
+    type: object
+  models.CertificationCategory:
+    properties:
+      items:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+    type: object
+  models.CertificationTrack:
+    properties:
+      description:
+        type: string
+      iconImage:
+        type: string
+      items:
+        items:
+          type: string
+        type: array
+      levels:
+        items:
+          $ref: '#/definitions/models.TrackLevel'
+        type: array
+      title:
+        type: string
+    type: object
+  models.ChangePasswordRequest:
+    properties:
+      current_password:
+        type: string
+      new_password:
+        type: string
+    required:
+    - current_password
+    - new_password
+    type: object
+  models.Contact:
+    properties:
+      contacts:
+        items:
+          $ref: '#/definitions/models.ContactItem'
+        type: array
+      email:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.ContactItem:
+    properties:
+      color:
+        type: string
+      href:
+        type: string
+      label:
+        type: string
+    type: object
+  models.CreateExperienciaRequest:
+    properties:
+      atividades:
+        items:
+          type: string
+        type: array
+      cargo:
+        type: string
+      empresa:
+        type: string
+      localizacao:
+        type: string
+      ordem:
+        type: integer
+      periodo:
+        type: string
+    type: object
+  models.Education:
+    properties:
+      currentPhase:
+        type: string
+      degree:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      institution:
+        type: string
+      location:
+        type: string
+      period:
+        type: string
+      status:
+        description: '"completed" ou "inProgress"'
+        type: string
+      topics:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    type: object
+  models.ExperienciaProfissional:
+    properties:
+      atividades:
+        items:
+          type: string
+        type: array
+      cargo:
+        type: string
+      empresa:
+        type: string
+      id:
+        type: integer
+      localizacao:
+        type: string
+      ordem:
+        type: integer
+      periodo:
+        type: string
+    type: object
+  models.Feature:
+    properties:
+      description:
+        type: string
+      title:
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  models.LoginResponse:
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  models.Projeto:
+    properties:
+      descricao:
+        type: string
+      tecnologias:
+        items:
+          type: string
+        type: array
+      titulo:
+        type: string
+    type: object
+  models.TrackLevel:
+    properties:
+      description:
+        type: string
+      level:
+        type: string
+    type: object
+  models.UpdateExperienciaRequest:
+    properties:
+      atividades:
+        items:
+          type: string
+        type: array
+      cargo:
+        type: string
+      empresa:
+        type: string
+      localizacao:
+        type: string
+      ordem:
+        type: integer
+      periodo:
+        type: string
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+  description: API REST para gerenciamento de portfólio pessoal
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Portfolio API
+  version: "1.0"
+paths:
+  /api/admin/experiences:
+    get:
+      description: Retorna todas as experiências profissionais
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ExperienciaProfissional'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Lista experiências
+      tags:
+      - admin
+    post:
+      consumes:
+      - application/json
+      description: Cria uma nova experiência profissional
+      parameters:
+      - description: Dados da experiência
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateExperienciaRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Cria experiência
+      tags:
+      - admin
+  /api/admin/experiences/{id}:
+    delete:
+      description: Deleta uma experiência profissional
+      parameters:
+      - description: ID da experiência
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Deleta experiência
+      tags:
+      - admin
+    get:
+      description: Retorna uma experiência profissional por ID
+      parameters:
+      - description: ID da experiência
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ExperienciaProfissional'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Obtém experiência
+      tags:
+      - admin
+    put:
+      consumes:
+      - application/json
+      description: Atualiza uma experiência profissional existente
+      parameters:
+      - description: ID da experiência
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Dados da experiência
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateExperienciaRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Atualiza experiência
+      tags:
+      - admin
+  /api/admin/experiences/{id}/translations:
+    get:
+      description: Retorna as traduções de uma experiência para os idiomas en e es
+      parameters:
+      - description: ID da experiência
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/models.UpdateExperienciaRequest'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Obtém traduções
+      tags:
+      - admin
+    post:
+      consumes:
+      - application/json
+      description: Salva as traduções de uma experiência para os 3 idiomas
+      parameters:
+      - description: ID da experiência
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Traduções por idioma (pt-BR, en, es)
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties:
+            $ref: '#/definitions/models.UpdateExperienciaRequest'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Salva traduções
+      tags:
+      - admin
+  /api/admin/projects/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Atualiza um projeto existente
+      parameters:
+      - description: ID do projeto
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Dados do projeto
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Projeto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Atualiza projeto
+      tags:
+      - admin
+  /api/admin/translations/{language}:
+    put:
+      consumes:
+      - application/json
+      description: Atualiza o valor de uma chave de tradução para um idioma específico
+      parameters:
+      - description: Código do idioma (pt-BR, en, es)
+        in: path
+        name: language
+        required: true
+        type: string
+      - description: Chave e valor da tradução (key, value)
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Atualiza tradução
+      tags:
+      - admin
+  /api/auth/change-password:
+    post:
+      consumes:
+      - application/json
+      description: Altera a senha do usuário autenticado
+      parameters:
+      - description: Dados para alteração de senha
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ChangePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Altera senha
+      tags:
+      - auth
+  /api/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Autentica um usuário e retorna um token JWT
+      parameters:
+      - description: Credenciais de login
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Login
+      tags:
+      - auth
+  /api/portfolio/about:
+    get:
+      consumes:
+      - application/json
+      description: Retorna os dados da seção "Sobre Mim" traduzidos para o idioma
+        especificado
+      parameters:
+      - description: 'Código do idioma (pt-BR, en, es). Padrão: pt-BR'
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.About'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Obtém seção About
+      tags:
+      - portfolio
+  /api/portfolio/certification-categories:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as categorias de certificações traduzidas para o
+        idioma especificado
+      parameters:
+      - description: 'Código do idioma (pt-BR, en, es). Padrão: pt-BR'
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.CertificationCategory'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista categorias de certificações
+      tags:
+      - portfolio
+  /api/portfolio/certification-tracks:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as trilhas de certificações traduzidas para o idioma
+        especificado
+      parameters:
+      - description: 'Código do idioma (pt-BR, en, es). Padrão: pt-BR'
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.CertificationTrack'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista trilhas de certificações
+      tags:
+      - portfolio
+  /api/portfolio/contact:
+    get:
+      consumes:
+      - application/json
+      description: Retorna as informações de contato
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Contact'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Obtém informações de contato
+      tags:
+      - portfolio
+  /api/portfolio/educations:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as formações acadêmicas traduzidas para o idioma
+        especificado
+      parameters:
+      - description: 'Código do idioma (pt-BR, en, es). Padrão: pt-BR'
+        in: query
+        name: language
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Education'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista formações acadêmicas
+      tags:
+      - portfolio
+  /api/portfolio/experiences:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as experiências profissionais
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ExperienciaProfissional'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista experiências profissionais
+      tags:
+      - portfolio
+  /api/portfolio/interpersonal-skills:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as categorias de habilidades interpessoais
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.CategoriaHabilidade'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista habilidades interpessoais
+      tags:
+      - portfolio
+  /api/portfolio/projects:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todos os projetos do portfólio
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Projeto'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista projetos
+      tags:
+      - portfolio
+  /api/portfolio/skills:
+    get:
+      consumes:
+      - application/json
+      description: Retorna todas as categorias de habilidades técnicas
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.CategoriaHabilidade'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista habilidades técnicas
+      tags:
+      - portfolio
+  /api/portfolio/translations/{language}:
+    get:
+      consumes:
+      - application/json
+      description: Retorna as traduções para o idioma especificado
+      parameters:
+      - description: Código do idioma (pt-BR, en, es)
+        in: path
+        name: language
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Obtém traduções
+      tags:
+      - portfolio
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Retorna o status da API
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Health check
+      tags:
+      - health
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

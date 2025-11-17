@@ -15,6 +15,7 @@ Portfólio pessoal moderno e responsivo desenvolvido com tecnologias de ponta, a
 - [Instalação e Configuração](#instalação-e-configuração)
 - [Executando o Projeto](#executando-o-projeto)
 - [API Endpoints](#api-endpoints)
+- [Documentação Swagger](#documentação-swagger)
 - [Internacionalização](#internacionalização)
 - [Desenvolvimento](#desenvolvimento)
 - [Build e Deploy](#build-e-deploy)
@@ -33,6 +34,7 @@ Este é um portfólio pessoal completo desenvolvido com arquitetura moderna, sep
 - 🔒 **Segurança**: Middlewares de segurança, CORS configurado e tratamento de erros robusto
 - 📊 **Logging Estruturado**: Sistema de logs completo e organizado
 - 🗄️ **Banco de Dados**: PostgreSQL com sistema de migrações versionado
+- 📚 **Documentação Swagger**: API completamente documentada com Swagger/OpenAPI
 
 ## 🚀 Funcionalidades
 
@@ -107,6 +109,7 @@ O sistema inclui um painel administrativo completo com autenticação JWT para g
 - **PostgreSQL 18** - Banco de dados relacional
 - **pgx/v5 5.5** - Driver PostgreSQL para Go
 - **godotenv 1.5** - Gerenciamento de variáveis de ambiente
+- **Swagger/OpenAPI** - Documentação interativa da API (swaggo/echo-swagger, swaggo/swag)
 
 ### DevOps e Ferramentas
 
@@ -133,6 +136,7 @@ novo-portfolio/
 │   │   └── logger/             # Sistema de logging
 │   ├── migrations/             # Scripts de migração SQL
 │   ├── scripts/                # Scripts utilitários
+│   ├── docs/                   # Documentação Swagger gerada
 │   ├── go.mod                  # Dependências Go
 │   └── README.md               # Documentação do backend
 │
@@ -227,6 +231,44 @@ go run cmd/server/main.go
 
 O servidor estará disponível em `http://localhost:8080`
 
+### Documentação Swagger
+
+A documentação interativa da API está disponível através do Swagger UI:
+
+```
+http://localhost:8080/swagger/index.html
+```
+
+#### Recursos do Swagger
+
+- 📖 **Documentação Completa**: Todos os endpoints documentados com exemplos
+- 🧪 **Teste Interativo**: Teste os endpoints diretamente pela interface
+- 🔐 **Autenticação Integrada**: Suporte para autenticação JWT Bearer Token
+- 📋 **Modelos de Dados**: Visualização dos modelos de request/response
+- 🏷️ **Tags Organizadas**: Endpoints organizados por categorias (portfolio, auth, admin, health)
+
+#### Como Usar o Swagger
+
+1. **Acesse a Interface**: Navegue até `http://localhost:8080/swagger/index.html`
+2. **Autenticação**: Para testar endpoints protegidos:
+   - Clique no botão **"Authorize"** no topo da página
+   - Informe o token JWT no formato: `Bearer <seu-token>`
+   - O token pode ser obtido fazendo login via `/api/auth/login`
+3. **Testar Endpoints**: Clique em qualquer endpoint para expandir e ver detalhes, exemplos e testar diretamente
+
+#### Regenerar Documentação
+
+Após adicionar ou modificar anotações Swagger nos handlers:
+
+```bash
+cd backend
+# Instalar swag CLI (se ainda não tiver)
+go install github.com/swaggo/swag/cmd/swag@latest
+
+# Gerar documentação
+~/go/bin/swag init -g cmd/server/main.go --output docs
+```
+
 ### Frontend
 
 ```bash
@@ -246,6 +288,8 @@ O frontend estará disponível em `http://localhost:5173`
 4. O painel permite gerenciar traduções, experiências profissionais e projetos (em desenvolvimento)
 
 ## 🔌 API Endpoints
+
+> 💡 **Documentação Interativa**: Para uma documentação completa e interativa com exemplos, acesse o [Swagger UI](http://localhost:8080/swagger/index.html) quando o servidor estiver rodando.
 
 ### Health Check
 
@@ -351,6 +395,21 @@ golangci-lint run
 # Crie os arquivos .up.sql e .down.sql na pasta migrations
 # Siga a numeração sequencial (ex: 014_nome_da_migration.up.sql)
 ```
+
+#### Documentação Swagger
+
+```bash
+# Instalar swag CLI (se ainda não tiver)
+go install github.com/swaggo/swag/cmd/swag@latest
+
+# Gerar documentação Swagger
+~/go/bin/swag init -g cmd/server/main.go --output docs
+
+# A documentação estará disponível em:
+# http://localhost:8080/swagger/index.html
+```
+
+**Nota**: Após adicionar ou modificar anotações Swagger nos handlers, é necessário regenerar a documentação executando o comando acima.
 
 ### Frontend
 
@@ -495,7 +554,7 @@ As traduções são gerenciadas em:
 ## 📝 Próximos Passos
 
 - [ ] Implementar testes unitários e de integração
-- [ ] Adicionar documentação Swagger/OpenAPI
+- [x] Adicionar documentação Swagger/OpenAPI ✅
 - [ ] Implementar cache (Redis ou in-memory)
 - [ ] Configurar CI/CD
 - [ ] Implementar tema claro/escuro completo

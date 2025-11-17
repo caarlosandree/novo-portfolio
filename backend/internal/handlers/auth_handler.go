@@ -3,10 +3,11 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/labstack/echo/v4"
 	"portfolio-backend/internal/logger"
 	"portfolio-backend/internal/models"
 	"portfolio-backend/internal/services"
+
+	"github.com/labstack/echo/v4"
 )
 
 type AuthHandler struct {
@@ -70,6 +71,7 @@ func (h *AuthHandler) Login(c echo.Context) error {
 // @Tags         auth
 // @Accept       json
 // @Produce      json
+// @Security     BearerAuth
 // @Param        body      body      models.ChangePasswordRequest  true  "Dados para alteração de senha"
 // @Success      200       {object}  map[string]string
 // @Failure      400       {object}  map[string]string
@@ -119,4 +121,3 @@ func (h *AuthHandler) ChangePassword(c echo.Context) error {
 		"message": "Senha alterada com sucesso",
 	})
 }
-

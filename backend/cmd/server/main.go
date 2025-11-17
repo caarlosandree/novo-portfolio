@@ -10,6 +10,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	echoSwagger "github.com/swaggo/echo-swagger"
+	_ "portfolio-backend/docs" // swagger docs
 	"portfolio-backend/internal/config"
 	"portfolio-backend/internal/database"
 	"portfolio-backend/internal/handlers"
@@ -18,6 +20,25 @@ import (
 	"portfolio-backend/internal/repositories"
 	"portfolio-backend/internal/services"
 )
+
+// @title           Portfolio API
+// @version         1.0
+// @description     API REST para gerenciamento de portfólio pessoal
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.email  support@example.com
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8080
+// @BasePath  /
+
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @description Type "Bearer" followed by a space and JWT token.
 
 func main() {
 	// Teste de deploy automático via GitHub Actions
@@ -79,6 +100,9 @@ func main() {
 
 	// Rotas
 	setupRoutes(e, portfolioHandler, healthHandler, authHandler, authService, adminHandler)
+	
+	// Swagger UI
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	// Inicia servidor em goroutine
 	go func() {

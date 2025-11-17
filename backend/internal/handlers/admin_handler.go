@@ -4,10 +4,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/labstack/echo/v4"
 	"portfolio-backend/internal/logger"
 	"portfolio-backend/internal/models"
 	"portfolio-backend/internal/services"
+
+	"github.com/labstack/echo/v4"
 )
 
 type AdminHandler struct {
@@ -26,6 +27,7 @@ func NewAdminHandler(adminService services.AdminService) *AdminHandler {
 // @Tags         admin
 // @Accept       json
 // @Produce      json
+// @Security     BearerAuth
 // @Param        language  path      string  true  "Código do idioma (pt-BR, en, es)"
 // @Param        body      body      map[string]string  true  "Chave e valor da tradução (key, value)"
 // @Success      200       {object}  map[string]string
@@ -88,6 +90,7 @@ func (h *AdminHandler) UpdateTranslation(c echo.Context) error {
 // @Description  Retorna todas as experiências profissionais
 // @Tags         admin
 // @Produce      json
+// @Security     BearerAuth
 // @Success      200  {array}   models.ExperienciaProfissional
 // @Failure      500  {object}  map[string]string
 // @Router       /api/admin/experiences [get]
@@ -110,6 +113,7 @@ func (h *AdminHandler) GetAllExperiences(c echo.Context) error {
 // @Description  Retorna uma experiência profissional por ID
 // @Tags         admin
 // @Produce      json
+// @Security     BearerAuth
 // @Param        id   path      int  true  "ID da experiência"
 // @Success      200  {object}  models.ExperienciaProfissional
 // @Failure      404  {object}  map[string]string
@@ -143,6 +147,7 @@ func (h *AdminHandler) GetExperience(c echo.Context) error {
 // @Tags         admin
 // @Accept       json
 // @Produce      json
+// @Security     BearerAuth
 // @Param        body  body      models.CreateExperienciaRequest  true  "Dados da experiência"
 // @Success      201   {object}  map[string]interface{}
 // @Failure      400   {object}  map[string]string
@@ -181,6 +186,7 @@ func (h *AdminHandler) CreateExperience(c echo.Context) error {
 // @Tags         admin
 // @Accept       json
 // @Produce      json
+// @Security     BearerAuth
 // @Param        id    path      int  true  "ID da experiência"
 // @Param        body  body      models.UpdateExperienciaRequest  true  "Dados da experiência"
 // @Success      200   {object}  map[string]string
@@ -226,6 +232,7 @@ func (h *AdminHandler) UpdateExperience(c echo.Context) error {
 // @Description  Retorna as traduções de uma experiência para os idiomas en e es
 // @Tags         admin
 // @Produce      json
+// @Security     BearerAuth
 // @Param        id   path      int  true  "ID da experiência"
 // @Success      200  {object}  map[string]models.UpdateExperienciaRequest
 // @Failure      404  {object}  map[string]string
@@ -259,6 +266,7 @@ func (h *AdminHandler) GetExperienceTranslations(c echo.Context) error {
 // @Tags         admin
 // @Accept       json
 // @Produce      json
+// @Security     BearerAuth
 // @Param        id    path      int  true  "ID da experiência"
 // @Param        body  body      map[string]models.UpdateExperienciaRequest  true  "Traduções por idioma (pt-BR, en, es)"
 // @Success      200   {object}  map[string]string
@@ -327,6 +335,7 @@ func (h *AdminHandler) SaveExperienceTranslations(c echo.Context) error {
 // @Description  Deleta uma experiência profissional
 // @Tags         admin
 // @Produce      json
+// @Security     BearerAuth
 // @Param        id   path      int  true  "ID da experiência"
 // @Success      200  {object}  map[string]string
 // @Failure      400  {object}  map[string]string
@@ -365,6 +374,7 @@ func (h *AdminHandler) DeleteExperience(c echo.Context) error {
 // @Tags         admin
 // @Accept       json
 // @Produce      json
+// @Security     BearerAuth
 // @Param        id    path      int  true  "ID do projeto"
 // @Param        body  body      models.Projeto  true  "Dados do projeto"
 // @Success      200   {object}  map[string]string
@@ -377,4 +387,3 @@ func (h *AdminHandler) UpdateProject(c echo.Context) error {
 		"error": "Endpoint em desenvolvimento",
 	})
 }
-
