@@ -535,28 +535,143 @@ GOOS=linux GOARCH=amd64 go build -o bin/server-linux cmd/server/main.go
 GOOS=windows GOARCH=amd64 go build -o bin/server.exe cmd/server/main.go
 ```
 
-### Docker (Exemplo)
+### Deploy no Google Cloud Run 🚀
 
-```dockerfile
-FROM golang:1.25-alpine AS builder
-WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
-COPY . .
-RUN go build -o server cmd/server/main.go
+O projeto está configurado para deploy no Google Cloud Run com Docker.
 
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
-COPY --from=builder /app/server .
-CMD ["./server"]
+#### Pré-requisitos
+
+1. **Google Cloud SDK instalado e configurado**:
+   ```bash
+   gcloud auth login
+   gcloud config set project SEU_PROJECT_ID
+   ```
+
+2. **APIs habilitadas** (o script faz isso automaticamente):
+   - Cloud Build API
+   - Cloud Run API
+   - Container Registry API
+
+#### Deploy Automatizado (Recomendado)
+
+Use o script de deploy incluído:
+
+```bash
+# Deploy básico (usa projeto do gcloud config)
+./deploy.sh
+
+# Deploy com parâmetros customizados
+./deploy.sh PROJECT_ID SERVICE_NAME REGION
+
+# Exemplo:
+./deploy.sh meu-projeto portfolio-backend southamerica-east1
+```
+
+O script:
+- ✅ Constrói a imagem Docker
+- ✅ Faz upload para Google Container Registry
+- ✅ Faz deploy no Cloud Run
+- ✅ Configura recursos otimizados (512Mi RAM, 1 CPU)
+- ✅ Habilita acesso público (allow-unauthenticated)
+
+#### Configurar Variáveis de Ambiente
+
+Após o primeiro deploy, configure a `DATABASE_URL` do Supabase:
+
+```bash
+gcloud run services update portfolio-backend \
+  --update-env-vars DATABASE_URL='postgresql://user:pass@host:port/db' \
+  --region southamerica-east1
+```
+
+Ou configure via Console do Google Cloud:
+1. Acesse Cloud Run no Console
+2. Selecione o serviço `portfolio-backend`
+3. Vá em "Editar e implantar nova revisão"
+4. Adicione a variável `DATABASE_URL` na seção "Variáveis e segredos"
+
+#### Deploy Manual
+
+Se preferir fazer manualmente:
+
+```bash
+# 1. Definir variáveis
+PROJECT_ID="seu-projeto-id"
+SERVICE_NAME="portfolio-backend"
+REGION="southamerica-east1"
+IMAGE_NAME="gcr.io/${PROJECT_ID}/${SERVICE_NAME}"
+
+# 2. Build e push da imagem
+gcloud builds submit --tag $IMAGE_NAME
+
+# 3. Deploy no Cloud Run
+gcloud run deploy $SERVICE_NAME \
+  --image $IMAGE_NAME \
+  --platform managed \
+  --region $REGION \
+  --allow-unauthenticated \
+  --memory 512Mi \
+  --cpu 1 \
+  --min-instances 0 \
+  --max-instances 10 \
+  --timeout 300 \
+  --port 8080 \
+  --set-env-vars "ENV=production" \
+  --set-env-vars "DATABASE_URL=sua-url-do-supabase"
+```
+
+#### Verificar Deploy
+
+```bash
+# Obter URL do serviço
+gcloud run services describe portfolio-backend \
+  --platform managed \
+  --region southamerica-east1 \
+  --format 'value(status.url)'
+
+# Testar health check
+curl https://SEU-SERVICO.run.app/health
+```
+
+#### Recursos Configurados
+
+- **Memória**: 512Mi (ajustável conforme necessidade)
+- **CPU**: 1 vCPU
+- **Instâncias mínimas**: 0 (escala para zero quando não há tráfego)
+- **Instâncias máximas**: 10
+- **Timeout**: 300 segundos
+- **Porta**: 8080 (Cloud Run define PORT automaticamente)
+
+#### Custo
+
+Cloud Run cobra apenas pelo uso:
+- **Gratuito**: Primeiros 2 milhões de requisições/mês
+- **Pós-gratuito**: ~$0.40 por milhão de requisições
+- **Memória/CPU**: Cobrado por segundo de uso
+
+Para um portfólio pessoal, geralmente fica dentro do tier gratuito.
+
+### Docker (Local)
+
+Para testar localmente:
+
+```bash
+# Build
+docker build -t portfolio-backend .
+
+# Run
+docker run -p 8080:8080 \
+  -e DATABASE_URL="postgresql://..." \
+  -e PORT=8080 \
+  -e ENV=production \
+  portfolio-backend
 ```
 
 ### Variáveis de Ambiente em Produção
 
 Certifique-se de configurar:
-- `DATABASE_URL`: URL de conexão com o banco
-- `PORT`: Porta do servidor (padrão: 8080)
+- `DATABASE_URL`: URL de conexão com o banco (Supabase)
+- `PORT`: Porta do servidor (Cloud Run define automaticamente, padrão: 8080)
 - `ENV`: Ambiente (deve ser `production`)
 
 ## 📜 Scripts Úteis

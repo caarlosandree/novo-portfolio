@@ -37,7 +37,7 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
+    minify: 'terser', // Usando terser para melhor controle de minificação
     terserOptions: {
       compress: {
         drop_console: true,
