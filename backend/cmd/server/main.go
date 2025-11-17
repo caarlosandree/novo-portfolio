@@ -56,7 +56,7 @@ func main() {
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"}, // Em produção, especifique os domínios permitidos
 		AllowMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions},
-		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
 	}))
 	e.Use(middleware.Secure())
 
@@ -69,8 +69,16 @@ func main() {
 	portfolioHandler := handlers.NewPortfolioHandler(portfolioService)
 	healthHandler := handlers.NewHealthHandler()
 
+	authRepo := repositories.NewAuthRepository(db)
+	authService := services.NewAuthService(authRepo)
+	authHandler := handlers.NewAuthHandler(authService)
+
+	adminRepo := repositories.NewAdminRepository(db)
+	adminService := services.NewAdminService(adminRepo)
+	adminHandler := handlers.NewAdminHandler(adminService)
+
 	// Rotas
-	setupRoutes(e, portfolioHandler, healthHandler)
+	setupRoutes(e, portfolioHandler, healthHandler, authHandler, authService, adminHandler)
 
 	// Inicia servidor em goroutine
 	go func() {
@@ -100,14 +108,23 @@ func main() {
 	logger.Info("Servidor encerrado com sucesso")
 }
 
-func setupRoutes(e *echo.Echo, portfolioHandler *handlers.PortfolioHandler, healthHandler *handlers.HealthHandler) {
+func setupRoutes(e *echo.Echo, portfolioHandler *handlers.PortfolioHandler, healthHandler *handlers.HealthHandler, authHandler *handlers.AuthHandler, authService services.AuthService, adminHandler *handlers.AdminHandler) {
 	// Health check
 	e.GET("/health", healthHandler.HealthCheck)
 
 	// API routes
 	api := e.Group("/api")
-	portfolio := api.Group("/portfolio")
+	
+	// Rotas públicas de autenticação
+	auth := api.Group("/auth")
+	auth.POST("/login", authHandler.Login)
+	
+	// Rotas protegidas de autenticação
+	protectedAuth := api.Group("/auth", emiddleware.AuthMiddleware(authService))
+	protectedAuth.POST("/change-password", authHandler.ChangePassword)
 
+	// Rotas públicas do portfólio
+	portfolio := api.Group("/portfolio")
 	portfolio.GET("/skills", portfolioHandler.GetSkills)
 	portfolio.GET("/interpersonal-skills", portfolioHandler.GetInterpersonalSkills)
 	portfolio.GET("/experiences", portfolioHandler.GetExperiences)
@@ -118,5 +135,15 @@ func setupRoutes(e *echo.Echo, portfolioHandler *handlers.PortfolioHandler, heal
 	portfolio.GET("/certification-tracks", portfolioHandler.GetCertificationTracks)
 	portfolio.GET("/contact", portfolioHandler.GetContact)
 	portfolio.GET("/translations/:language", portfolioHandler.GetTranslations)
+
+	// Rotas protegidas (admin)
+	admin := api.Group("/admin", emiddleware.AuthMiddleware(authService))
+	
+	// Rotas de administração de traduções
+	admin.PUT("/translations/:language", adminHandler.UpdateTranslation)
+	
+	// Rotas de administração de outras entidades
+	admin.PUT("/experiences/:id", adminHandler.UpdateExperience)
+	admin.PUT("/projects/:id", adminHandler.UpdateProject)
 }
 

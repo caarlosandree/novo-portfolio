@@ -1,8 +1,9 @@
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem, useTheme as useMuiTheme } from '@mui/material'
-import { Menu as MenuIcon, LightMode, DarkMode, Language } from '@mui/icons-material'
+import { Menu as MenuIcon, LightMode, DarkMode, Language, AdminPanelSettings, Login } from '@mui/icons-material'
 import { HideOnScroll } from './HideOnScroll'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useAuth } from '@/contexts/AuthContext'
 import { useState, useEffect, useMemo, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 
@@ -14,6 +15,7 @@ interface NavigationBarProps {
 export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarProps) => {
   const { mode, toggleTheme } = useTheme()
   const { language, changeLanguage, t } = useLanguage()
+  const { isAuthenticated } = useAuth()
   const theme = useMuiTheme()
   const [activeSection, setActiveSection] = useState<string>('inicio')
   const [displayedText, setDisplayedText] = useState('')
@@ -74,6 +76,10 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
     setDisplayedText('')
     console.log(`[NavigationBar] handleLanguageChange concluído para: ${lang}`)
   }, [changeLanguage, handleLanguageMenuClose, language])
+
+  const handleAdminClick = useCallback(() => {
+    window.location.hash = isAuthenticated ? '#/admin' : '#/login'
+  }, [isAuthenticated])
 
   const navItems = useMemo(() => [
     { id: 'inicio', label: t('nav.home') },
@@ -279,6 +285,25 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
             >
               {mode === 'light' ? <DarkMode /> : <LightMode />}
             </IconButton>
+            <IconButton
+              onClick={handleAdminClick}
+              aria-label={isAuthenticated ? 'Administração' : 'Login'}
+              sx={{
+                ml: 1,
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+                '&:hover': {
+                  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)',
+                },
+                '&:focus-visible': {
+                  outline: `2px solid ${theme.palette.primary.main}`,
+                  outlineOffset: '2px',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              {isAuthenticated ? <AdminPanelSettings /> : <Login />}
+            </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1, alignItems: 'center' }}>
             <IconButton
@@ -321,6 +346,25 @@ export const NavigationBar = memo(({ onMenuClick, onNavigate }: NavigationBarPro
               }}
             >
               {mode === 'light' ? <DarkMode /> : <LightMode />}
+            </IconButton>
+            <IconButton
+              onClick={handleAdminClick}
+              aria-label={isAuthenticated ? 'Administração' : 'Login'}
+              sx={{
+                ml: 1,
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+                '&:hover': {
+                  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)',
+                },
+                '&:focus-visible': {
+                  outline: `2px solid ${theme.palette.primary.main}`,
+                  outlineOffset: '2px',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              {isAuthenticated ? <AdminPanelSettings /> : <Login />}
             </IconButton>
             <IconButton
               color="inherit"

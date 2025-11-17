@@ -5,8 +5,6 @@ export const Footer = () => {
   const theme = useTheme()
   const { t } = useLanguage()
 
-  // Teste de deploy automático via GitHub Actions
-
   return (
     <Box
       sx={{
